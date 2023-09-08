@@ -29,28 +29,26 @@ public class Bank {
     }
     public Konto neuesKonto(char art, int kundenNr) {
         this.anzahlKonten++;
-        Konto k;
         Kunde kunde;
         int kontoNr;
         if (existiertKunde(kundenNr)) {
             kunde = findByKundenNr(kundenNr);
             if (art == 'g') {
                 kontoNr = kundenNr*100+1;
-                k = new Girokonto(kontoNr, globalSaldo, globalDispo);
+                Girokonto k = new Girokonto(kontoNr, globalSaldo, globalDispo);
                 this.konten[anzahlKonten] = k;
                 kunde.setGirokonto(k);
+                return k;
             }
             else if (art == 's') {
                 kontoNr = kundenNr*100+2;
-                k = new Sparkonto(kontoNr, globalSaldo, globalZinssatz)
+                Sparkonto k = new Sparkonto(kontoNr, globalSaldo, globalZinssatz);
                 this.konten[anzahlKonten] = k;
                 kunde.setSparkonto(k);
-            }
-            else {
-                throw new Error("Nicht erkannte Art des Kontos");
+                return k;
             }
         }
-        return k;
+        throw new Error("Nicht erkannte Art des Kontos");
     }
 
     public void einzahlen(char kontoTyp, int menge) {
@@ -80,33 +78,20 @@ public class Bank {
     }
 
     public Kunde findByKundenNr(int kundenNr) {
-        for (int i = 0; i < anzahlKunden.length; i++) {
+        for (int i = 0; i < this.kunden.length; i++) {
             if (this.kunden[i].getKundenNr() == kundenNr) {
                 return this.kunden[i];
             }
         }
-        throw new Error("Kein Kunde mit dieser Kunden nummer")
+        throw new Error("Kein Kunde mit dieser Kunden nummer");
     }
-
-    public void kontoAnlegen(char art, int kundenNr) {
-        Kunde kunde;
-        if (existiertKunde(kundenNr)) {
-            kunde = findByKundenNr(kundenNr)
-        }
-        Konto konto = neuesKonto(art, kundenNr);
-        if (art == 's')  {
-            kunde.setGirokonto(konto);
-        }
-        if (art == 'g')  {
-            kunde.setSparkonto(konto);
-        }
-    }
+  
     public boolean existiertKunde(int kundenNr) {
         try {
             findByKundenNr(kundenNr);
         }
         catch(Exception e) {
-            return false
+            return false;
         }
         return true;
     }
