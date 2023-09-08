@@ -3,6 +3,7 @@ public class Kunde {
     private String nachname;
     private String addresse;
     private int gebDatum;
+    private int kundenNr;
     private Girokonto gk;
     private Sparkonto sk;
 
@@ -46,13 +47,18 @@ public class Kunde {
         this.gebDatum = gebDatum;
     }
 
-    public Kunde(String vorname, String nachname, String addresse, int gebDatum, Sparkonto sk, Girokonto gk) {
+    public Kunde(String vorname, String nachname, String addresse, int gebDatum, int kundneNr) {
         this.vorname = vorname;
         this.nachname = nachname;
         this.addresse = addresse;
         this.gebDatum = gebDatum;
-        this.gk = gk;
-        this.sk = sk;
+        this.kundenNr = kundenNr;
+        this.gk = null;
+        this.sk = null;
+    }
+
+    public int getKundenNr() {
+        return this.kundenNr;
     }
 
     public void einzahlen(char kontoTyp, int menge) {
@@ -69,5 +75,11 @@ public class Kunde {
 
     public void ueberweise(Konto sender, Konto empfaender, int menge) {
 
+    }
+    public void setGirokonto(Girokonto gk) {
+        this.gk = gk;
+    }
+    public void setSparkonto(Sparkonto sk) {
+        this.sk = sk;
     }
 }
