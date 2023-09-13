@@ -69,8 +69,15 @@ public class Bank {
 
     }
 
-    public void ueberweise(Konto sender, Konto empfaender, int menge, int tan) {
-
+    public void ueberweise(int kontoNrEmpfaenger, int kontoNrSender, int menge) {
+        // Existieren beide Konten?
+        if (existiertKonto(kontoNrEmpfaenger) && existiertKonto(kontoNrSender) && kontoNrEmpfaenger != kontoNrSender) {
+            Konto sender = findByKontoNr(kontoNrSender);
+            Konto emfaenger = findByKontoNr(kontoNrEmpfaenger);
+            // Geld abziehen
+            sender.setSaldo(sender.getSaldo() - menge);
+            emfaenger.setSaldo(emfaenger.getSaldo() + menge);
+        }
     }
 
     public static Bank bank() {
