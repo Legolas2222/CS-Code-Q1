@@ -57,7 +57,7 @@ public class Bank {
         if (existiertKonto(kontoNr)) {
             Konto k = findByKontoNr(kontoNr);
             // Menge des Kontos veraendern
-            k.setSaldo(k.getSaldo + menge);
+            k.setSaldo(k.getSaldo() + menge);
         }
     }
 
