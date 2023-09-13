@@ -98,7 +98,9 @@ public class Bank {
         catch (Exception e) {
             return false;
         }
-        return true;
+        finally {
+            return true;
+        }
     }
 
     public Kunde findByKundenNr(int kundenNr) {
@@ -117,6 +119,8 @@ public class Bank {
         catch(Exception e) {
             return false;
         }
-        return true;
+        finally {
+            return true;
+        }
     }
 }
