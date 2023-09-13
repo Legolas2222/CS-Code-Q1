@@ -51,8 +51,14 @@ public class Bank {
         throw new Error("Nicht erkannte Art des Kontos");
     }
 
-    public void einzahlen(char kontoTyp, int menge) {
-
+    public void einzahlen(int menge, int kontoNr) {
+        // 1. Kontotyp und Menge ueberpruefen
+        // Konto ueber die KontoNr heraussuchen
+        if (existiertKonto(kontoNr)) {
+            Konto k = findByKontoNr(kontoNr);
+            // Menge des Kontos veraendern
+            k.setSaldo(k.getSaldo + menge);
+        }
     }
 
     public void auszahlen(char kontoTyp, int menge, int pin) {
@@ -75,6 +81,24 @@ public class Bank {
             Bank.bank = new Bank(0, new Kunde[1000], 45, 34, 12);
             return Bank.bank;
         }
+    }
+
+    public Konto findByKontoNr(int kontoNr) {
+        for (int i = 0; i < this.konten.length; i++) {
+            if (this.konten[i].getKontoNr() == kontoNr) {
+                return this.konten[i];
+            }
+        }
+        throw new Error("Kein Konto mit dieser Kontonummer");
+    }
+    public boolean existiertKonto(int kontoNr) {
+        try {
+            findByKontoNr(kontoNr);
+        }
+        catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     public Kunde findByKundenNr(int kundenNr) {
