@@ -2,6 +2,9 @@
 *.ctxt
 *.bluej
 
+#Include the one IO.class
+!/IF-LW6-D-Switch-Anweisung/IO.class
+
 IF-LW1-E-Kapitel-6-Schleifen/package.bluej
 IF-LW1-D-Eigenes-Beispiel-Vererbung\package.bluej
 IF-LW1-E-Kapitel-6-Schleifen/package.bluej
