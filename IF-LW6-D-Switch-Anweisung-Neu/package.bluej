@@ -2,10 +2,10 @@
 dependency1.from=TestSwitch
 dependency1.to=IO
 dependency1.type=UsesDependency
-editor.fx.0.height=0
-editor.fx.0.width=0
-editor.fx.0.x=0
-editor.fx.0.y=0
+editor.fx.0.height=739
+editor.fx.0.width=816
+editor.fx.0.x=448
+editor.fx.0.y=98
 objectbench.height=89
 objectbench.width=760
 package.divider.horizontal=0.6
