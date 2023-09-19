@@ -47,7 +47,7 @@ public class Kunde {
         this.gebDatum = gebDatum;
     }
 
-    public Kunde(String vorname, String nachname, String addresse, int gebDatum, int kundneNr) {
+    public Kunde(String vorname, String nachname, String addresse, int gebDatum, int kundenNr) {
         this.vorname = vorname;
         this.nachname = nachname;
         this.addresse = addresse;

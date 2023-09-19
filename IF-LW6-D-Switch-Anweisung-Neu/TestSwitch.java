@@ -1,6 +1,10 @@
+import java.util.Scanner;
+
 public class TestSwitch{
     public static void main(String[] args) {
-        int zahl = IO.readInt("Welchen Filmtitel möchtest du wissen?");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Bitte gib die Nummer des nächsten Films ein");
+        int zahl = scanner.nextInt();
         switch(zahl)
         {
             case 1: {

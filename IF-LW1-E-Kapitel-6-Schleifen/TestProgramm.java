@@ -84,8 +84,8 @@ public class TestProgramm {
 
     public static void Aufgabe6() {
         Random r = new Random(0);
-        int zahl1 = r.nextInt(-99, 100);
-        int zahl2 = r.nextInt(-99, 100);
+        int zahl1 = r.nextInt( 00);
+        int zahl2 = r.nextInt( 100);
         // int ergebnis = zahl1 + zahl2;
         System.out.println("Kopfrechentrainer ");
         System.out.println("Was ist " + zahl1 + " + " + zahl2 + " ?");
