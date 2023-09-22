@@ -76,9 +76,11 @@ public class Kunde {
     public void ueberweise(Konto sender, Konto empfaender, int menge) {
 
     }
+
     public void setGirokonto(Girokonto gk) {
         this.gk = gk;
     }
+
     public void setSparkonto(Sparkonto sk) {
         this.sk = sk;
     }

@@ -20,6 +20,7 @@ public class TestSwitch{
                 System.out.println("Ungültige Position des Lieblingsfilms!");
             }
         }
+        scanner.close();
         
     }
 }

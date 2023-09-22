@@ -15,18 +15,17 @@ public class Bank {
         this.globalZinssatz = globalZinssatz;
     }
 
-
     private static Bank bank;
-    
 
     public Kunde neuerKunde(String vorname, String nachname, String addresse, int gebDatum) {
         this.anzahlKunden++;
-        int kundenNr = anzahlKunden+1000;
+        int kundenNr = anzahlKunden + 1000;
 
         Kunde k = new Kunde(vorname, nachname, addresse, gebDatum, kundenNr);
         this.kunden[anzahlKunden] = k;
         return k;
     }
+
     public Konto neuesKonto(char art, int kundenNr) {
         this.anzahlKonten++;
         Kunde kunde;
@@ -34,14 +33,13 @@ public class Bank {
         if (existiertKunde(kundenNr)) {
             kunde = findByKundenNr(kundenNr);
             if (art == 'g') {
-                kontoNr = kundenNr*100+1;
+                kontoNr = kundenNr * 100 + 1;
                 Girokonto k = new Girokonto(kontoNr, globalSaldo, globalDispo);
                 this.konten[anzahlKonten] = k;
                 kunde.setGirokonto(k);
                 return k;
-            }
-            else if (art == 's') {
-                kontoNr = kundenNr*100+2;
+            } else if (art == 's') {
+                kontoNr = kundenNr * 100 + 2;
                 Sparkonto k = new Sparkonto(kontoNr, globalSaldo, globalZinssatz);
                 this.konten[anzahlKonten] = k;
                 kunde.setSparkonto(k);
@@ -83,8 +81,7 @@ public class Bank {
     public static Bank bank() {
         if (Bank.bank != null) {
             return Bank.bank;
-        }
-        else {
+        } else {
             Bank.bank = new Bank(0, new Kunde[1000], 45, 34, 12);
             return Bank.bank;
         }
@@ -98,16 +95,14 @@ public class Bank {
         }
         throw new Error("Kein Konto mit dieser Kontonummer");
     }
+
     public boolean existiertKonto(int kontoNr) {
         try {
             findByKontoNr(kontoNr);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
-        finally {
             return true;
-        }
     }
 
     public Kunde findByKundenNr(int kundenNr) {
@@ -118,16 +113,14 @@ public class Bank {
         }
         throw new Error("Kein Kunde mit dieser Kunden nummer");
     }
-  
+
     public boolean existiertKunde(int kundenNr) {
         try {
             findByKundenNr(kundenNr);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
-        finally {
-            return true;
-        }
-    }
+        return true;
+    }   
+
 }

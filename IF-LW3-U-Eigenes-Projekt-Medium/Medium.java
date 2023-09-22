@@ -15,7 +15,7 @@ public class Medium {
     }
     
     public void seteKommentar(String neuerKommentar) {
-        this.kommentar = kommentar;
+        this.kommentar = neuerKommentar;
     }
     public String gibKommentar() {
         return this.kommentar;
