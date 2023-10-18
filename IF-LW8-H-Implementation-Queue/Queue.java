@@ -11,10 +11,10 @@ public class Queue<ContentType> {
     private boolean isOneElement() {
         return (this.head == this.tail) ? true : false;
     }
-    public QueueNode getFront() {
+    public QueueNode front() {
         return this.head;
     }
-    public QueueNode tail() {
+    private QueueNode tail() {
         return this.tail;
     }
     public void enqueue(ContentType t) {
@@ -23,14 +23,14 @@ public class Queue<ContentType> {
             this.head = newNode;
             this.tail = newNode;
         }
-        else if (this.isOneElement()) {
-            this.head.setNext(newNode);
+        else {
+            this.tail.setNext(newNode);
             this.tail = newNode;
         }
-        else {
-            
-        }
-
+    }
+    public void dequeue() {
+        QueueNode firstNode = this.head;
+        
     }
 
 
