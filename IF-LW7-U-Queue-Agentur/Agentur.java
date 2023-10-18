@@ -24,7 +24,8 @@ public class Agentur {
     public Statist statistVermittlen(String g) {
         Queue<Statist> tmp = new Queue<Statist>();
         Statist x = null;
-        while (!this.statisten.isEmpty()) {
+        boolean fertig = false;
+        while (!this.statisten.isEmpty() || fertig) {
             if (this.statisten.front().getGeschlecht() == g) {
                 x = this.statisten.front();
                 this.statisten.dequeue();
@@ -34,7 +35,11 @@ public class Agentur {
                 this.statisten.dequeue();
             }
         }
-        this.statisten = tmp;
+        while(!statisten.isEmpty()) {
+            hilf.enqueue(statisten.front());
+            statisten.dequeue();
+        }
+        statisten = hilf;
         return x;
     }
 
