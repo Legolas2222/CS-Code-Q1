@@ -29,8 +29,9 @@ public class Queue<ContentType> {
         }
     }
     public void dequeue() {
-        QueueNode firstNode = this.head;
-        
+        // QueueNode firstNode = this.head;
+        QueueNode secondNode = this.head.getNext();
+        this.head = secondNode;
     }
 
 
