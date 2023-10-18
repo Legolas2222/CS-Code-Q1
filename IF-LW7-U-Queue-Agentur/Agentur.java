@@ -20,17 +20,16 @@ public class Agentur {
         this.statisten.dequeue();
         return tmp;
     }
-    
+
     public Statist statistVermittlen(String g) {
         Queue<Statist> tmp = new Queue<Statist>();
         Statist x = null;
-        while(!this.statisten.isEmpty()) {
-            if(this.statisten.front().getGeschlecht() == g) {
+        while (!this.statisten.isEmpty()) {
+            if (this.statisten.front().getGeschlecht() == g) {
                 x = this.statisten.front();
                 this.statisten.dequeue();
-                
-            }
-            else {
+
+            } else {
                 tmp.enqueue(this.statisten.front());
                 this.statisten.dequeue();
             }
