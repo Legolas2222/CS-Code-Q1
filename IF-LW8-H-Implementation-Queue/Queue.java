@@ -12,7 +12,7 @@ public class Queue<ContentType> {
         return (this.head == null && this.tail == null) ? true : false;
     }
     public ContentType getFront() {
-        return this.head.getContent();
+        return (this.head != null) ? this.head.getFront : null;
     }
     public void enqueue(ContentType t) {
         QueueNode<ContentType> newNode = new QueueNode<ContentType>(t);
