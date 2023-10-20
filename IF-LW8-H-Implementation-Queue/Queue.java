@@ -8,17 +8,11 @@ public class Queue<ContentType> {
     public boolean isEmpty() {
         return (this.head == null && this.tail == null) ? true : false;
     }
-    private boolean isOneElement() {
-        return (this.head == this.tail) ? true : false;
-    }
     public ContentType getFront() {
         return this.head.getContent();
     }
-    private QueueNode tail() {
-        return this.tail;
-    }
     public void enqueue(ContentType t) {
-        QueueNode newNode = new QueueNode<ContentType>(t);
+        QueueNode<ContentType> newNode = new QueueNode<ContentType>(t);
         if (this.isEmpty()) {
             this.head = newNode;
             this.tail = newNode;
@@ -30,7 +24,7 @@ public class Queue<ContentType> {
     }
     public void dequeue() {
         // QueueNode firstNode = this.head;
-        QueueNode secondNode = this.head.getNext();
+        QueueNode<ContentType> secondNode = this.head.getNext();
         this.head = secondNode;
     }
     

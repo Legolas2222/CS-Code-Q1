@@ -1,13 +1,13 @@
 public class QueueNode<ContentType> {
     private ContentType contentObj;
-    private QueueNode nextNode = null;
+    private QueueNode<ContentType> nextNode = null;
     public QueueNode(ContentType t) {
         this.contentObj = t;
     }
-    public QueueNode getNext() {
+    public QueueNode<ContentType> getNext() {
         return this.nextNode;
     }
-    public void setNext(QueueNode qn) {
+    public void setNext(QueueNode<ContentType> qn) {
         this.nextNode = qn;
     }
     public ContentType getContent() {
