@@ -1,6 +1,6 @@
 public class Queue<ContentType> {
-    private QueueNode head = null;
-    private QueueNode tail = null;
+    private QueueNode<ContentType> head = null;
+    private QueueNode<ContentType> tail = null;
 
     public Queue() {
         
@@ -11,8 +11,8 @@ public class Queue<ContentType> {
     private boolean isOneElement() {
         return (this.head == this.tail) ? true : false;
     }
-    public QueueNode front() {
-        return this.head;
+    public ContentType getFront() {
+        return this.head.getContent();
     }
     private QueueNode tail() {
         return this.tail;
@@ -33,6 +33,6 @@ public class Queue<ContentType> {
         QueueNode secondNode = this.head.getNext();
         this.head = secondNode;
     }
-
+    
 
 }

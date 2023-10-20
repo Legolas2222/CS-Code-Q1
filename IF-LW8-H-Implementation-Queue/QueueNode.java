@@ -10,4 +10,7 @@ public class QueueNode<ContentType> {
     public void setNext(QueueNode qn) {
         this.nextNode = qn;
     }
+    public ContentType getContent() {
+        return this.contentObj;
+    }
 }

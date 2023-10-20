@@ -16,7 +16,7 @@ public class Agentur {
     }
 
     public Statist statistVermitteln() {
-        Statist tmp = this.statisten.front();
+        Statist tmp = this.statisten.getFront();
         this.statisten.dequeue();
         return tmp;
     }
@@ -26,20 +26,20 @@ public class Agentur {
         Statist x = null;
         boolean fertig = false;
         while (!this.statisten.isEmpty() || fertig) {
-            if (this.statisten.front().getGeschlecht() == g) {
-                x = this.statisten.front();
+            if (this.statisten.getFront().getGeschlecht() == g) {
+                x = this.statisten.getFront();
                 this.statisten.dequeue();
 
             } else {
-                tmp.enqueue(this.statisten.front());
+                tmp.enqueue(this.statisten.getFront());
                 this.statisten.dequeue();
             }
         }
         while(!statisten.isEmpty()) {
-            hilf.enqueue(statisten.front());
+            tmp.enqueue(statisten.getFront());
             statisten.dequeue();
         }
-        statisten = hilf;
+        statisten = tmp;
         return x;
     }
 
