@@ -1,7 +1,11 @@
 public class Queue<ContentType> {
     private QueueNode<ContentType> head = null;
     private QueueNode<ContentType> tail = null;
-
+    private int length = 0;
+    
+    public int getLength() {
+        return length;
+    }
     public Queue() {
         
     }
@@ -19,11 +23,13 @@ public class Queue<ContentType> {
         if (this.isEmpty()) {
             this.head = newNode;
             this.tail = newNode;
+            this.length++;
             return;
         }
         else {
             this.tail.setNext(newNode);
             this.tail = newNode;
+            this.length++;
             return;
         }
     }
@@ -34,11 +40,13 @@ public class Queue<ContentType> {
         if (this.isOneElement()) {
             this.head = null;
             this.tail = null;
+            this.length = 0;
             return;
         }
         else {
             QueueNode<ContentType> secondNode = this.head.getNext();
             this.head = secondNode;
+            this.length--;
             return;
         }
     }

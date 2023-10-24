@@ -47,9 +47,19 @@ public class Argentur {
         this.statisten.enqueue(neuerStatist);
     }
 
+    public void sortiereNachScore() {
+        // Queue zu Array?
+        // Array sortieren?
+        // Zurück zu Queue?
+    }
+
+
+
+
+
     public static void main(String[] args) {
         Argentur a = new Argentur("1");
-        a.neuerStatist(new Statist("Hans", "M"));
+        a.neuerStatist(new Statist("Hans", "M", 25));
         System.out.println(a.statistVermitteln().toString());
         System.out.println("test");
     }
