@@ -1,4 +1,4 @@
-public class Agentur {
+public class Argentur {
     private Queue<Statist> statisten;
     private String name;
 
@@ -10,7 +10,7 @@ public class Agentur {
         this.name = name;
     }
 
-    public Agentur(String name) {
+    public Argentur(String name) {
         this.statisten = new Queue<Statist>();
         this.name = name;
     }
@@ -22,7 +22,7 @@ public class Agentur {
     }
 
     public Statist statistVermittlen(String g) {
-        Queue<Statist> tmp = new Queue<Statist>();
+     Queue<Statist> tmp = new Queue<Statist>();
         Statist x = null;
         boolean fertig = false;
         while (!this.statisten.isEmpty() || fertig) {
@@ -48,7 +48,7 @@ public class Agentur {
     }
 
     public static void main(String[] args) {
-        Agentur a = new Agentur("1");
+        Argentur a = new Argentur("1");
         a.neuerStatist(new Statist("Hans", "M"));
         System.out.println(a.statistVermitteln().toString());
         System.out.println("test");
