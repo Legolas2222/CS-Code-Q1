@@ -1,3 +1,5 @@
+
+
 public class Argentur {
     private Queue<Statist> statisten;
     private String name;
@@ -48,9 +50,24 @@ public class Argentur {
     }
 
     public void sortiereNachScore() {
-        // Queue zu Array?
-        // Array sortieren?
-        // Zurück zu Queue?
+        
+    }
+    public Statist Find(Statist refObject) {
+        QueueNode<Statist> tmp = this.statisten.getHead();
+        boolean found = false;
+        while(!found) {
+            if(tmp == null) {
+                return null;
+            }
+            if (tmp.getContent() == refObject) {
+                found = true;
+                return tmp.getContent();
+            }
+            else{
+                tmp = tmp.getNext();
+            }
+        }
+        return null;
     }
 
 

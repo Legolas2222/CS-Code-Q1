@@ -1,5 +1,9 @@
 public class Queue<ContentType> {
     private QueueNode<ContentType> head = null;
+    public QueueNode<ContentType> getHead() {
+        return head;
+    }
+
     private QueueNode<ContentType> tail = null;
     private int length = 0;
 
@@ -23,18 +27,16 @@ public class Queue<ContentType> {
         return (this.head != null) ? this.head.getContent() : null;
     }
 
-    public ContentType enqueue(ContentType t) {
+    public void enqueue(ContentType t) {
         QueueNode<ContentType> newNode = new QueueNode<ContentType>(t);
         if (this.isEmpty()) {
             this.head = newNode;
             this.tail = newNode;
             this.length++;
-            return newNode.contentObj;
         } else {
             this.tail.setNext(newNode);
             this.tail = newNode;
             this.length++;
-            return newNode.contentObj;
         }
     }
 
@@ -54,27 +56,7 @@ public class Queue<ContentType> {
             return;
         }
     }
+    
 
-
-    public class QueueNode<SubContentType> {
-        private SubContentType contentObj;
-        private QueueNode<SubContentType> nextNode = null;
-
-        public QueueNode(SubContentType t) {
-            this.contentObj = t;
-        }
-
-        public QueueNode<SubContentType> getNext() {
-            return this.nextNode;
-        }
-
-        public void setNext(QueueNode<SubContentType> qn) {
-            this.nextNode = qn;
-        }
-
-        public SubContentType getContent() {
-            return this.contentObj;
-        }
-    }
-
+    
 }
