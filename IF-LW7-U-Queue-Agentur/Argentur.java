@@ -58,10 +58,10 @@ public class Argentur {
             Statist biggestScoreStatist = null;
             for (int j = 0; j < tmpLength; j++) {
                 // skip search times equal to the maximumsFound to avoid already sorted elements
-                if(j > maximumsFound) {
+                if (j > maximumsFound) {
                     continue;
                 }
-                if(biggestScoreStatist != null) {
+                if (biggestScoreStatist != null) {
                     this.statisten.enqueue(biggestScoreStatist);
                 }
 
@@ -74,23 +74,23 @@ public class Argentur {
                 this.statisten.dequeue();
                 // Re-Enqueue the element in the back of the Queue
                 this.statisten.enqueue(tmp);
-                //! wrong approach
+                // ! wrong approach
                 // 2. put on the start of the Queue and increment the maximums found
-                
+
             }
         }
 
-
-
     }
-    // This function should return the Index of the Biggest Element between the start of the Queue and alreadySortedIndex
+
+    // This function should return the Index of the Biggest Element between the
+    // start of the Queue and the number of already Sorted items from the back
     public int minIndex(int alreadySorted) {
         int minIndex = 0;
         int biggestScore = 0;
         for (int i = 0; i < this.statisten.getLength(); i++) {
             Statist tmp = this.statisten.getFront();
             this.statisten.dequeue();
-            if (tmp.getScore() > biggestScore) {
+            if (tmp.getScore() > biggestScore && i <= this.statisten.getLength() - alreadySorted) {
                 biggestScore = tmp.getScore();
                 minIndex = i;
             }
@@ -98,9 +98,6 @@ public class Argentur {
         }
         return minIndex;
     }
-
-    
-
 
     public Statist getBiggestScore() {
         Statist biggestScore = new Statist("tmp", "-", 0);
@@ -116,16 +113,16 @@ public class Argentur {
             // Re-Enqueue the element in the back of the Queue
             this.statisten.enqueue(tmp);
         }
-        //! Useless Method!!!!
+        // ! Useless Method!!!!
         return biggestScore;
     }
-
 
     public static void main(String[] args) {
         Argentur a = new Argentur("1");
         a.neuerStatist(new Statist("Hans", "M", 2));
         a.neuerStatist(new Statist("Bob", "M", 17));
-        a.neuerStatist(new Statist("Max", "M", 88));
+        a.neuerStatist(new Statist("Max", "M", 8));
+        a.neuerStatist(new Statist("Theo", "M", 88));
         System.out.println(a.minIndex(0));
     }
 }
