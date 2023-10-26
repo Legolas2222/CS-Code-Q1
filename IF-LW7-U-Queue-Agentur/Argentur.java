@@ -84,14 +84,17 @@ public class Argentur {
 
     }
     // This function should return the Index of the Biggest Element between the start of the Queue and alreadySortedIndex
-    public int minIndex(int alreadySortedIndex) {
+    public int minIndex(int alreadySorted) {
         int minIndex = 0;
-        int biggestScore = -1;
+        int biggestScore = 0;
         for (int i = 0; i < this.statisten.getLength(); i++) {
             Statist tmp = this.statisten.getFront();
-            if (tmp.getScore() > biggestScore && i <= alreadySortedIndex) {
-                minIndex++;
+            this.statisten.dequeue();
+            if (tmp.getScore() > biggestScore) {
+                biggestScore = tmp.getScore();
+                minIndex = i;
             }
+            statisten.enqueue(tmp);
         }
         return minIndex;
     }
@@ -115,22 +118,12 @@ public class Argentur {
         return biggestScore;
     }
 
-    public void print() {
-        System.out.println("\n== Printing the Queue ==");
-        Queue<Statist> tmp = this.statisten;
-        while (!tmp.isEmpty()) {
-            tmp.getFront().print();
-            System.out.println("");
-            tmp.dequeue();
-        }
-    }
 
     public static void main(String[] args) {
         Argentur a = new Argentur("1");
         a.neuerStatist(new Statist("Hans", "M", 2));
         a.neuerStatist(new Statist("Bob", "M", 17));
-        a.neuerStatist(new Statist("Max", "M", 8));
-        a.print();
+        a.neuerStatist(new Statist("Max", "M", 88));
         System.out.println(a.minIndex(0));
     }
 }
