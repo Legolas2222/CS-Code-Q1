@@ -99,6 +99,8 @@ public class Argentur {
         return minIndex;
     }
 
+    
+
 
     public Statist getBiggestScore() {
         Statist biggestScore = new Statist("tmp", "-", 0);

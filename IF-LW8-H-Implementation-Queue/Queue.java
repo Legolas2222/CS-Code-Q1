@@ -57,6 +57,12 @@ public class Queue<ContentType> {
         }
     }
     
-
+    public void cycle(int numberOfTimes) {
+        for (int i = 0; i < numberOfTimes; i++) {
+            ContentType tmp = this.getFront();
+            this.dequeue();
+            this.enqueue(tmp);
+        }
+    }
     
 }
