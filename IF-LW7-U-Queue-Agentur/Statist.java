@@ -1,4 +1,5 @@
 import java.util.Random;
+
 public class Statist {
   private int score;
 
@@ -7,7 +8,11 @@ public class Statist {
   }
 
   public void setScore(int score) {
-    this.score = score;
+    if (score < 0) {
+      this.score = 0;
+    } else {
+      this.score = score;
+    }
   }
 
   private String name;
@@ -16,7 +21,11 @@ public class Statist {
   public Statist(String name, String geschlecht, int score) {
     this.name = name;
     this.geschlecht = geschlecht;
-    this.score = score;
+    if (score < 0) {
+      this.score = 0;
+    } else {
+      this.score = score;
+    }
   }
 
   public String getName() {
@@ -39,5 +48,11 @@ public class Statist {
     Random r = new Random();
     String g = (r.nextInt(2) == 0) ? "male" : "female";
     return new Statist(String.valueOf(r.nextInt(6)), g, r.nextInt(11));
+  }
+
+  public void print() {
+    System.out.println("Name: " + this.name);
+    System.out.println("Gender: " + this.geschlecht);
+    System.out.println("Score: " + this.score);
   }
 }
