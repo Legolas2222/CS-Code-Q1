@@ -108,7 +108,7 @@ public class Argentur {
                 continue;
             }
             this.statisten.enqueue(this.statisten.getFront());
-            this.statisten.dequeue
+            this.statisten.dequeue();
         }
     }
 
