@@ -48,49 +48,17 @@ public class Argentur {
         this.statisten.enqueue(neuerStatist);
     }
 
-    // TODO need work
-    public void sortiereNachScore() {
-        int maximumsFound = 0;
-        int tmpLength = this.statisten.getLength();
-        // 4. Repeat steps 1-3 for each element of the queue until it's sorted
-        for (int i = 0; i < tmpLength; i++) {
-            // 1. find the biggest score in the Queue
-            Statist biggestScoreStatist = null;
-            for (int j = 0; j < tmpLength; j++) {
-                // skip search times equal to the maximumsFound to avoid already sorted elements
-                if (j > maximumsFound) {
-                    continue;
-                }
-                if (biggestScoreStatist != null) {
-                    this.statisten.enqueue(biggestScoreStatist);
-                }
 
-                Statist tmp = this.statisten.getFront();
-                // Compare for Bigger Score
-                if (tmp.getScore() > biggestScoreStatist.getScore()) {
-                    biggestScoreStatist = tmp;
-                }
-                // Dequeue current element
-                this.statisten.dequeue();
-                // Re-Enqueue the element in the back of the Queue
-                this.statisten.enqueue(tmp);
-                // ! wrong approach
-                // 2. put on the start of the Queue and increment the maximums found
-
-            }
-        }
-
-    }
 
     // This function should return the Index of the Biggest Element between the
     // start of the Queue and the number of already Sorted items from the back
-    public int minIndex(int alreadySorted) {
+    public int minIndex(/*int alreadySorted*/) {
         int minIndex = 0;
         int biggestScore = 0;
         for (int i = 0; i < this.statisten.getLength(); i++) {
             Statist tmp = this.statisten.getFront();
             this.statisten.dequeue();
-            if (tmp.getScore() > biggestScore && i <= this.statisten.getLength() - alreadySorted) {
+            if (tmp.getScore() > biggestScore /*&& i <= this.statisten.getLength() - alreadySorted*/) {
                 biggestScore = tmp.getScore();
                 minIndex = i;
             }
@@ -99,37 +67,30 @@ public class Argentur {
         return minIndex;
     }
 
-    public void bringToEnd(int indexOfElement) {
-        Statist elementToBack = null;
+    public void sortByScore() {
+        Queue<Statist> hilfe = new Queue<Statist>();
         for (int i = 0; i < this.statisten.getLength(); i++) {
-            if(i == indexOfElement) {
-                elementToBack = this.statisten.getFront();
-                this.statisten.dequeue();
-                continue;
-            }
-            this.statisten.enqueue(this.statisten.getFront());
+            int maxIndex = minIndex();
+            this.statisten.cycle(maxIndex);
+            this.statisten.getFront().print();
+            hilfe.enqueue(this.statisten.getFront());
             this.statisten.dequeue();
         }
+        print(hilfe);
     }
 
-    public Statist getBiggestScore() {
-        Statist biggestScore = new Statist("tmp", "-", 0);
-        int tmpLength = this.statisten.getLength();
-        for (int i = 0; i < tmpLength; i++) {
-            Statist tmp = this.statisten.getFront();
-            // Compare for Bigger Score
-            if (tmp.getScore() >= biggestScore.getScore()) {
-                biggestScore = tmp;
-            }
-            // Dequeue current element
-            this.statisten.dequeue();
-            // Re-Enqueue the element in the back of the Queue
-            this.statisten.enqueue(tmp);
-        }
-        // ! Useless Method!!!!
-        return biggestScore;
+    public void print(Queue<Statist> q) {
+        System.out.println("\n=========================");
+        QueueNode<Statist> tmp = q.getHead();
+        while(tmp != q.getTail()) {
+            tmp.getContent().print();
+            tmp = tmp.getNext();
+            System.out.println("-------------------------");
+        } 
+        q.getTail().getContent().print();
     }
 
+    
     public static void main(String[] args) {
         Argentur a = new Argentur("1");
         a.neuerStatist(new Statist("Hans", "M", 2));
@@ -137,6 +98,6 @@ public class Argentur {
         a.neuerStatist(new Statist("Theo", "M", 88));
         a.neuerStatist(new Statist("Max", "M", 8));
         a.neuerStatist(new Statist("Jan", "W", 34));
-        System.out.println(a.minIndex(1));
+        a.sortByScore();
     }
 }

@@ -1,5 +1,9 @@
 public class Queue<ContentType> {
     private QueueNode<ContentType> head = null;
+    public QueueNode<ContentType> getTail() {
+        return tail;
+    }
+
     public QueueNode<ContentType> getHead() {
         return head;
     }
@@ -63,6 +67,9 @@ public class Queue<ContentType> {
             this.dequeue();
             this.enqueue(tmp);
         }
+    }
+    public void concat(Queue<ContentType> neu ) {
+
     }
     
 }
