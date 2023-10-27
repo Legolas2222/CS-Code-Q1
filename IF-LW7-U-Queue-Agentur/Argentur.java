@@ -1,5 +1,4 @@
 
-
 public class Argentur {
     private Queue<Statist> statisten;
     private String name;
@@ -24,7 +23,7 @@ public class Argentur {
     }
 
     public Statist statistVermittlen(String g) {
-     Queue<Statist> tmp = new Queue<Statist>();
+        Queue<Statist> tmp = new Queue<Statist>();
         Statist x = null;
         boolean fertig = false;
         while (!this.statisten.isEmpty() || fertig) {
@@ -37,7 +36,7 @@ public class Argentur {
                 this.statisten.dequeue();
             }
         }
-        while(!statisten.isEmpty()) {
+        while (!statisten.isEmpty()) {
             tmp.enqueue(statisten.getFront());
             statisten.dequeue();
         }
@@ -49,35 +48,52 @@ public class Argentur {
         this.statisten.enqueue(neuerStatist);
     }
 
-    public void sortiereNachScore() {
-        
-    }
-    public Statist Find(Statist refObject) {
-        QueueNode<Statist> tmp = this.statisten.getHead();
-        boolean found = false;
-        while(!found) {
-            if(tmp == null) {
-                return null;
+    // This function should return the Index of the Biggest Element between the
+    // front of the Queue and the number of already Sorted items from the back
+    private int IndexOfBiggestScore(/* int alreadySorted */) {
+        int minIndex = 0;
+        int biggestScore = 0;
+        for (int i = 0; i < this.statisten.getLength(); i++) {
+            Statist tmp = this.statisten.getFront();
+            this.statisten.dequeue();
+            if (tmp.getScore() > biggestScore /* && i <= this.statisten.getLength() - alreadySorted */) {
+                biggestScore = tmp.getScore();
+                minIndex = i;
             }
-            if (tmp.getContent() == refObject) {
-                found = true;
-                return tmp.getContent();
-            }
-            else{
-                tmp = tmp.getNext();
-            }
+            statisten.enqueue(tmp);
         }
-        return null;
+        return minIndex;
     }
 
+    public void sortByScore() {
+        Queue<Statist> hilfe = new Queue<Statist>();
+        int tmpLength = this.statisten.getLength();
+        for (int i = 0; i < tmpLength; i++) {
+            int maxIndex = IndexOfBiggestScore();
+            this.statisten.cycle(maxIndex);
+            hilfe.enqueue(this.statisten.getFront());
+            this.statisten.dequeue();
+        }
+        this.statisten = hilfe;
+    }
 
-
-
+    public void print(Queue<Statist> q) {
+        System.out.println("\n=========================");
+        QueueNode<Statist> tmp = q.getHead();
+        while (tmp != q.getTail()) {
+            tmp.getContent().print();
+            tmp = tmp.getNext();
+            System.out.println("-------------------------");
+        }
+        q.getTail().getContent().print();
+    }
 
     public static void main(String[] args) {
         Argentur a = new Argentur("1");
-        a.neuerStatist(new Statist("Hans", "M", 25));
-        System.out.println(a.statistVermitteln().toString());
-        System.out.println("test");
+        a.neuerStatist(new Statist("Hans", "M", 1));
+        a.neuerStatist(new Statist("Max", "M", 82));
+        a.neuerStatist(new Statist("Bob", "M", 23));
+        a.neuerStatist(new Statist("Jan", "W", 122));
+        a.neuerStatist(new Statist("Theo", "M", 14));
     }
 }
