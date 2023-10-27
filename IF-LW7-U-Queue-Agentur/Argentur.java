@@ -99,6 +99,19 @@ public class Argentur {
         return minIndex;
     }
 
+    public void bringToEnd(int indexOfElement) {
+        Statist elementToBack = null;
+        for (int i = 0; i < this.statisten.getLength(); i++) {
+            if(i == indexOfElement) {
+                elementToBack = this.statisten.getFront();
+                this.statisten.dequeue();
+                continue;
+            }
+            this.statisten.enqueue(this.statisten.getFront());
+            this.statisten.dequeue
+        }
+    }
+
     public Statist getBiggestScore() {
         Statist biggestScore = new Statist("tmp", "-", 0);
         int tmpLength = this.statisten.getLength();
@@ -120,9 +133,10 @@ public class Argentur {
     public static void main(String[] args) {
         Argentur a = new Argentur("1");
         a.neuerStatist(new Statist("Hans", "M", 2));
-        a.neuerStatist(new Statist("Bob", "M", 17));
-        a.neuerStatist(new Statist("Max", "M", 8));
+        a.neuerStatist(new Statist("Bob", "M", 88));
         a.neuerStatist(new Statist("Theo", "M", 88));
-        System.out.println(a.minIndex(0));
+        a.neuerStatist(new Statist("Max", "M", 8));
+        a.neuerStatist(new Statist("Jan", "W", 34));
+        System.out.println(a.minIndex(1));
     }
 }
