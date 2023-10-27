@@ -69,7 +69,10 @@ public class Queue<ContentType> {
         }
     }
     public void concat(Queue<ContentType> neu ) {
-
+        while (!neu.isEmpty()) {
+            this.enqueue(neu.getFront());
+            neu.dequeue();
+        }
     }
     
 }
