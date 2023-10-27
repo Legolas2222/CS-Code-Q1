@@ -48,17 +48,15 @@ public class Argentur {
         this.statisten.enqueue(neuerStatist);
     }
 
-
-
     // This function should return the Index of the Biggest Element between the
-    // start of the Queue and the number of already Sorted items from the back
-    public int minIndex(/*int alreadySorted*/) {
+    // front of the Queue and the number of already Sorted items from the back
+    private int IndexOfBiggestScore(/* int alreadySorted */) {
         int minIndex = 0;
         int biggestScore = 0;
         for (int i = 0; i < this.statisten.getLength(); i++) {
             Statist tmp = this.statisten.getFront();
             this.statisten.dequeue();
-            if (tmp.getScore() > biggestScore /*&& i <= this.statisten.getLength() - alreadySorted*/) {
+            if (tmp.getScore() > biggestScore /* && i <= this.statisten.getLength() - alreadySorted */) {
                 biggestScore = tmp.getScore();
                 minIndex = i;
             }
@@ -69,35 +67,33 @@ public class Argentur {
 
     public void sortByScore() {
         Queue<Statist> hilfe = new Queue<Statist>();
-        for (int i = 0; i < this.statisten.getLength(); i++) {
-            int maxIndex = minIndex();
+        int tmpLength = this.statisten.getLength();
+        for (int i = 0; i < tmpLength; i++) {
+            int maxIndex = IndexOfBiggestScore();
             this.statisten.cycle(maxIndex);
-            this.statisten.getFront().print();
             hilfe.enqueue(this.statisten.getFront());
             this.statisten.dequeue();
         }
-        print(hilfe);
+        this.statisten = hilfe;
     }
 
     public void print(Queue<Statist> q) {
         System.out.println("\n=========================");
         QueueNode<Statist> tmp = q.getHead();
-        while(tmp != q.getTail()) {
+        while (tmp != q.getTail()) {
             tmp.getContent().print();
             tmp = tmp.getNext();
             System.out.println("-------------------------");
-        } 
+        }
         q.getTail().getContent().print();
     }
 
-    
     public static void main(String[] args) {
         Argentur a = new Argentur("1");
-        a.neuerStatist(new Statist("Hans", "M", 2));
-        a.neuerStatist(new Statist("Bob", "M", 88));
-        a.neuerStatist(new Statist("Theo", "M", 88));
-        a.neuerStatist(new Statist("Max", "M", 8));
-        a.neuerStatist(new Statist("Jan", "W", 34));
-        a.sortByScore();
+        a.neuerStatist(new Statist("Hans", "M", 1));
+        a.neuerStatist(new Statist("Max", "M", 82));
+        a.neuerStatist(new Statist("Bob", "M", 23));
+        a.neuerStatist(new Statist("Jan", "W", 122));
+        a.neuerStatist(new Statist("Theo", "M", 14));
     }
 }

@@ -49,6 +49,7 @@ public class Statist {
     String g = (r.nextInt(2) == 0) ? "male" : "female";
     return new Statist(String.valueOf(r.nextInt(6)), g, r.nextInt(11));
   }
+
   public void print() {
     System.out.println("Name: " + this.name);
     System.out.println("Gender: " + this.geschlecht);

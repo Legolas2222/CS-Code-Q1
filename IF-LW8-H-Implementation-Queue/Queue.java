@@ -1,5 +1,6 @@
 public class Queue<ContentType> {
     private QueueNode<ContentType> head = null;
+
     public QueueNode<ContentType> getTail() {
         return tail;
     }
@@ -60,7 +61,7 @@ public class Queue<ContentType> {
             return;
         }
     }
-    
+
     public void cycle(int numberOfTimes) {
         for (int i = 0; i < numberOfTimes; i++) {
             ContentType tmp = this.getFront();
@@ -68,11 +69,12 @@ public class Queue<ContentType> {
             this.enqueue(tmp);
         }
     }
-    public void concat(Queue<ContentType> neu ) {
+
+    public void concat(Queue<ContentType> neu) {
         while (!neu.isEmpty()) {
             this.enqueue(neu.getFront());
             neu.dequeue();
         }
     }
-    
+
 }
