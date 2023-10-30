@@ -77,6 +77,31 @@ public class Argentur {
         this.statisten = hilfe;
     }
 
+    public void sortByScoreUnterricht() {
+        Queue<Statist> tmpQ = new Queue<Statist>();
+        Queue<Statist> ergQ = new Queue<Statist>();
+        Statist maxScore = null;
+        while(!statisten.isEmpty()) {
+            maxScore = this.statisten.getFront();
+            statisten.dequeue();
+            while (!statisten.isEmpty()) {
+                if (statisten.getFront().getScore() > maxScore.getScore()) {
+                    tmpQ.enqueue(maxScore);
+                    maxScore = statisten.getFront();
+                    statisten.dequeue();
+                }
+                else {
+                    tmpQ.enqueue(statisten.getFront());
+                    statisten.dequeue();
+                }
+            }
+            ergQ.enqueue(maxScore);
+            statisten = tmpQ;
+            tmpQ = new Queue<Statist>();
+        }
+        statisten = ergQ;
+    }
+
     public void print(Queue<Statist> q) {
         System.out.println("\n=========================");
         QueueNode<Statist> tmp = q.getHead();
@@ -95,5 +120,7 @@ public class Argentur {
         a.neuerStatist(new Statist("Bob", "M", 23));
         a.neuerStatist(new Statist("Jan", "W", 122));
         a.neuerStatist(new Statist("Theo", "M", 14));
+        a.sortByScoreUnterricht();
+        a.print(a.statisten);
     }
 }
