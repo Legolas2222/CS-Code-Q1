@@ -81,7 +81,7 @@ public class Argentur {
         Queue<Statist> tmpQ = new Queue<Statist>();
         Queue<Statist> ergQ = new Queue<Statist>();
         Statist maxScore = null;
-        while(!statisten.isEmpty()) {
+        while (!statisten.isEmpty()) {
             maxScore = this.statisten.getFront();
             statisten.dequeue();
             while (!statisten.isEmpty()) {
@@ -89,8 +89,7 @@ public class Argentur {
                     tmpQ.enqueue(maxScore);
                     maxScore = statisten.getFront();
                     statisten.dequeue();
-                }
-                else {
+                } else {
                     tmpQ.enqueue(statisten.getFront());
                     statisten.dequeue();
                 }
@@ -100,6 +99,42 @@ public class Argentur {
             tmpQ = new Queue<Statist>();
         }
         statisten = ergQ;
+    }
+
+    public void sortByScoreInsertion() {
+        Queue<Statist> sorted = new Queue<Statist>();
+        Statist erster = statisten.getFront();
+        statisten.dequeue();
+        sorted.enqueue(erster);
+        while (!statisten.isEmpty()) {
+            // Damit die while-Schleife mit nur 1 Element nicht direkt terminiert.
+            if (sorted.getFront().getScore() > statisten.getFront().getScore()) {
+                sorted.enqueue(statisten.getFront());
+                sorted.dequeue();
+            } else {
+                sorted.enqueue(statisten.getFront());
+                statisten.dequeue();
+                Statist tmp = sorted.getFront();
+                sorted.dequeue();
+                sorted.enqueue(tmp);
+            }
+
+            while (sorted.getFront() != erster) {
+                // Falls der Score von dem den wir einfügen wollen kleiner ist, als der aktuell
+                // sortierte, dann "shiften" die Schlange um 1 und vergleichen mit dem nächsten
+                if (sorted.getFront().getScore() > statisten.getFront().getScore()) {
+                    Statist tmp = sorted.getFront();
+                    sorted.dequeue();
+                    sorted.enqueue(tmp);
+                } else {
+                    // Falls der an der richtigen Stelle steht, fügen wir ihn dort ein (Insertion)
+                    sorted.enqueue(statisten.getFront());
+                    // Dekrementieren der Ursprungsschlange
+                    statisten.dequeue();
+                }
+            }
+        }
+
     }
 
     public void print(Queue<Statist> q) {
@@ -120,7 +155,7 @@ public class Argentur {
         a.neuerStatist(new Statist("Bob", "M", 23));
         a.neuerStatist(new Statist("Jan", "W", 122));
         a.neuerStatist(new Statist("Theo", "M", 14));
-        a.sortByScoreUnterricht();
+        a.sortByScoreInsertion();
         a.print(a.statisten);
     }
 }
