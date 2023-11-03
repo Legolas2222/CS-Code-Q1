@@ -2,12 +2,13 @@ public class Stack<ContentType> {
 
     public class StackNode<SubContentType> {
         private SubContentType content;
+
         public SubContentType getContent() {
             return content;
         }
 
-        private StackNode<SubContentType> next; 
-        
+        private StackNode<SubContentType> next;
+
         public StackNode<SubContentType> getNext() {
             return next;
         }
@@ -21,8 +22,8 @@ public class Stack<ContentType> {
         }
     }
 
-    
     StackNode<ContentType> head;
+
     public Stack() {
         this.head = null;
     }
@@ -46,6 +47,5 @@ public class Stack<ContentType> {
             this.head = this.head.getNext();
         }
     }
-
 
 }
