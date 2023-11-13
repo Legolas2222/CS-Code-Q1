@@ -203,18 +203,12 @@ public class List<ContentType> {
         ListNode<ContentType> newNode = new ListNode<ContentType>(pContent);
         newNode.setNextNode(this.current);
         this.getPrevious(this.current).setNextNode(newNode);;
-        
-        // Neuen Knoten erstellen.
-        //EIGENER CODE 11
-        
-
       } else { //Fall: Es gibt kein aktuelles Element.
-
         if (this.isEmpty()) { // Fall: In leere Liste einfuegen.
-
-          // Neuen Knoten erstellen.
-          //EIGENER CODE 12
-          
+          ListNode<ContentType> newNode = new ListNode<ContentType>(pContent);
+          this.first = newNode;
+          this.last = newNode;
+          this.current = first;
         }
 
       }
@@ -232,7 +226,16 @@ public class List<ContentType> {
    *            das anzuhaengende Objekt vom Typ ContentType
    */
   public void append(ContentType pContent) {
-    //EIGENER CODE 13
+    if (!this.isEmpty() && pContent != null) {
+      ListNode<ContentType> newNode = new ListNode<ContentType>(pContent);
+      this.last.setNextNode(newNode);
+    }
+    if (this.isEmpty() && pContent != null) {
+      ListNode<ContentType> newNode = new ListNode<ContentType>(pContent);
+      this.last.setNextNode(newNode);
+      this.first.setNextNode(newNode);
+    }
+    
     
   }
 
@@ -277,12 +280,14 @@ public class List<ContentType> {
   public void remove() {
     // Nichts tun, wenn es kein aktuelle Element gibt oder die Liste leer ist.
     if (this.hasAccess() && !this.isEmpty()) { 
-
-      //EIGENER CODE 14
-
-      //Beim loeschen des letzten Elements last auf null setzen. 
-      //EIGENER CODE 15
-      
+      if (this.last == current) {
+        this.last = null;
+        this.current = this.getPrevious(current);
+        this.current.setNextNode(null);
+      } else {
+        this.current = this.getPrevious(current);
+        this.current.setNextNode(null);
+      }
     }
   }
 
