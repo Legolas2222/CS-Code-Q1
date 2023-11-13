@@ -3,8 +3,8 @@ public class Simulation{
     private Notentabelle notentabelle;
     
     public Simulation(){
-        kursarbeit = new Kursarbeit();
-        notentabelle = new Notentabelle();
+        kursarbeit = new Kursarbeit(Notentabelle.GenerischeTabelle());
+        notentabelle = Notentabelle.GenerischeTabelle();
     }
     
     public void neueKlausur(String pName, int nrArbeit){
