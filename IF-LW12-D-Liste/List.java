@@ -25,17 +25,17 @@ public class List<ContentType> {
 
   /* --------- Anfang der privaten inneren Klasse -------------- */
 
-  private class ListNode<ContentType> {
+  private class ListNode<SubContentType> {
 
-    private ContentType contentObject;
-    private ListNode<ContentType> next;
+    private SubContentType contentObject;
+    private ListNode<SubContentType> next;
 
     /**
      * Ein neues Objekt wird erschaffen. Der Verweis ist leer.
      * 
      * @param pContent das Inhaltsobjekt vom Typ ContentType
      */
-    private ListNode(ContentType pContent) {
+    private ListNode(SubContentType pContent) {
       contentObject = pContent;
       next = null;
     }
@@ -45,7 +45,7 @@ public class List<ContentType> {
      * 
      * @return das Inhaltsobjekt des Knotens
      */
-    public ContentType getContentObject() {
+    public SubContentType getContentObject() {
       return contentObject;
     }
 
@@ -54,7 +54,7 @@ public class List<ContentType> {
      * 
      * @param pContent das Inhaltsobjekt vom Typ ContentType
      */
-    public void setContentObject(ContentType pContent) {
+    public void setContentObject(SubContentType pContent) {
       contentObject = pContent;
     }
 
@@ -63,7 +63,7 @@ public class List<ContentType> {
      * 
      * @return das Objekt, auf das der aktuelle Verweis zeigt
      */
-    public ListNode<ContentType> getNextNode() {
+    public ListNode<SubContentType> getNextNode() {
       return this.next;
     }
 
@@ -73,7 +73,7 @@ public class List<ContentType> {
      * 
      * @param pNext der Nachfolger des Knotens
      */
-    public void setNextNode(ListNode<ContentType> pNext) {
+    public void setNextNode(ListNode<SubContentType> pNext) {
       this.next = pNext;
     }
 
@@ -178,8 +178,10 @@ public class List<ContentType> {
    *            das zu schreibende Objekt vom Typ ContentType
    */
   public void setContent(ContentType pContent) {
-    // Nichts tun, wenn es keinen Inhalt oder kein aktuelles Element gibt.
-    //EIGENER CODE 10
+    if (this.current == null || pContent == null) {
+      return;
+    }
+    this.current.setContentObject(pContent);
     
   }
 
@@ -198,7 +200,10 @@ public class List<ContentType> {
   public void insert(ContentType pContent) {
     if (pContent != null) { // Nichts tun, wenn es keinen Inhalt gibt.
       if (this.hasAccess()) { // Fall: Es gibt ein aktuelles Element.
-
+        ListNode<ContentType> newNode = new ListNode<ContentType>(pContent);
+        newNode.setNextNode(this.current);
+        this.getPrevious(this.current).setNextNode(newNode);;
+        
         // Neuen Knoten erstellen.
         //EIGENER CODE 11
         
@@ -292,9 +297,9 @@ public class List<ContentType> {
    *         pNode == null ist, pNode nicht in der Liste ist oder pNode der erste Knoten
    *         der Liste ist
    */
-  private ListNode getPrevious(ListNode pNode) {
+  private ListNode<ContentType> getPrevious(ListNode<ContentType> pNode) {
     if (pNode != null && pNode != first && !this.isEmpty()) {
-      ListNode temp = first;
+      ListNode<ContentType> temp = first;
       while (temp != null && temp.getNextNode() != pNode) {
         temp = temp.getNextNode();
       }
