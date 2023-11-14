@@ -1,5 +1,6 @@
 public class Kursarbeit{
     // Attribute
+
     private Stack<Klausur> linkerStapel;
     private Stack<Klausur> rechterStapel;
     private Stack<Klausur> arbeitsplatz;
@@ -12,10 +13,12 @@ public class Kursarbeit{
         this.arbeitsplatz = new Stack<Klausur>();
 
         this.tabelle = pNotentabelle;
-    }
+        //EIGENER CODE 
+   
     
     // Methoden
     public void neueKlausur(String pName){
+
         Klausur k = new Klausur(pName);
         this.linkerStapel.push(k);
     }
@@ -30,10 +33,8 @@ public class Kursarbeit{
     }
     
     public /*int*/void gibNote(String pName){
-        
-    }
-    
-    
+        //EIGENER CODE
+    }    
 
     public boolean istLinksLeer(){
         return this.linkerStapel.isEmpty();
@@ -67,6 +68,7 @@ public class Kursarbeit{
             this.linkerStapel.push(this.rechterStapel.top());
             this.rechterStapel.pop();
         }
+        //EIGENER CODE
     }
 }
 

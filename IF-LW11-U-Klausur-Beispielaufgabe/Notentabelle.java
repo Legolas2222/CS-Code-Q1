@@ -1,8 +1,6 @@
 public class Notentabelle {
 
     private int[] tabelle;
-    
-
     public Notentabelle(int punkte5, int punkte4, int punkte3, int punkte2, int punkte1) {
         this.tabelle = new int[6];
         tabelle[0] = punkte1;
@@ -21,7 +19,6 @@ public class Notentabelle {
         }
         return 1;
     }
-
     public void setzeNotenbereich(int note, int minPkt) {
         tabelle[note-1] = minPkt;
     }
@@ -38,4 +35,5 @@ public class Notentabelle {
     public static Notentabelle GenerischeTabelle() {
         return new Notentabelle(15, 20, 40, 55, 70);
     }
+
 }
