@@ -1,52 +1,73 @@
 public class Kursarbeit{
     // Attribute
-        //EIGENER CODE 
-    
+
+    private Stack<Klausur> linkerStapel;
+    private Stack<Klausur> rechterStapel;
+    private Stack<Klausur> arbeitsplatz;
+
+    private Notentabelle tabelle;
     // Konstruktoren
     public Kursarbeit(Notentabelle pNotentabelle){
-        //EIGENER CODE
-    }
+        this.linkerStapel = new Stack<Klausur>();
+        this.rechterStapel = new Stack<Klausur>();
+        this.arbeitsplatz = new Stack<Klausur>();
+
+        this.tabelle = pNotentabelle;
+        //EIGENER CODE 
+   
     
     // Methoden
     public void neueKlausur(String pName){
-        //EIGENER CODE
+
+        Klausur k = new Klausur(pName);
+        this.linkerStapel.push(k);
     }
 
     public void bewerteAP(int pPunkte){
-        //EIGENER CODE  
+        if (!this.arbeitsplatz.isEmpty()) {
+            Klausur k = this.arbeitsplatz.top();
+            k.setPunkte(pPunkte);
+            k.setNote(this.tabelle.bestimmeNote(pPunkte));
+            this.arbeitsplatz.push(k);
+        }  
     }
     
-    public int gibNote(String pName){
+    public /*int*/void gibNote(String pName){
         //EIGENER CODE
-    }
-    
-    
+    }    
 
     public boolean istLinksLeer(){
-        //EIGENER CODE
+        return this.linkerStapel.isEmpty();
     }
 
     public boolean istRechtsLeer(){
-        //EIGENER CODE
+        return this.rechterStapel.isEmpty();
     }
 
     public boolean istAPLeer(){
-         //EIGENER CODE
+        return this.arbeitsplatz.isEmpty();
     }
     
     public void legeVonLinksAufAP(){
-        //EIGENER CODE
+        this.arbeitsplatz.push(this.linkerStapel.top());
+        this.linkerStapel.pop();
     }
     
     public void legeVonAPNachRechts(){
-        //EIGENER CODE
+        this.rechterStapel.push(this.arbeitsplatz.top());
+        this.arbeitsplatz.pop();
     }
     
     public void legeVonRechtsNachLinks(){
-        //EIGENER CODE
+        this.linkerStapel.push(this.rechterStapel.top());
+        this.rechterStapel.pop();
     }    
     
     public void legeAlleVonRechtsNachLinks(){
+        while (!this.rechterStapel.isEmpty()) {
+            this.linkerStapel.push(this.rechterStapel.top());
+            this.rechterStapel.pop();
+        }
         //EIGENER CODE
     }
 }
