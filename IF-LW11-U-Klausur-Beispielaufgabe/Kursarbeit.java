@@ -24,17 +24,33 @@ public class Kursarbeit{
     }
 
     public void bewerteAP(int pPunkte){
-        if (!this.arbeitsplatz.isEmpty()) {
             Klausur k = this.arbeitsplatz.top();
             k.setPunkte(pPunkte);
-            k.setNote(this.tabelle.bestimmeNote(pPunkte));
-            this.arbeitsplatz.push(k);
-        }  
+            k.setNote(this.tabelle.bestimmeNote(pPunkte));       
     }
     
     public /*int*/void gibNote(String pName){
-        //EIGENER CODE
-    }    
+        
+    }
+
+    private int gibNoteImStack(String pName, Stack<Klausur> stack) {
+        Stack<Klausur> hilfe = new Stack<Klausur>();
+        int note = 0;
+        while (!stack.isEmpty()) {
+            if (stack.top().getName() == pName) {
+                note = stack.top().getNote(); 
+            }
+            hilfe.push(stack.top());
+            stack.pop();
+        }
+        while (!hilfe.isEmpty()) {
+            stack.push(hilfe.top());
+            hilfe.pop();
+        }
+        return note;
+    }
+    
+    
 
     public boolean istLinksLeer(){
         return this.linkerStapel.isEmpty();
