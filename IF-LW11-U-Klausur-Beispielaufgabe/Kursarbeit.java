@@ -15,7 +15,7 @@ public class Kursarbeit{
         this.tabelle = pNotentabelle;
         //EIGENER CODE 
    
-    
+    }
     // Methoden
     public void neueKlausur(String pName){
 
