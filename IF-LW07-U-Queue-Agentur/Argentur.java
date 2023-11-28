@@ -155,7 +155,44 @@ public class Argentur {
         a.neuerStatist(new Statist("Bob", "M", 23));
         a.neuerStatist(new Statist("Jan", "W", 122));
         a.neuerStatist(new Statist("Theo", "M", 14));
-        a.sortByScoreInsertion();
+        a.sortierenOneNote();
         a.print(a.statisten);
+    }
+
+    public void sortierenOneNote() {
+        Statist maxStat;
+        Queue<Statist> ergQ = new Queue<Statist>();
+        Queue<Statist> hilfQ = new Queue<Statist>();
+        // Für jedes Element in der Queue
+        while (!statisten.isEmpty()) {
+            // Erstes Element herausnehmen
+            maxStat = statisten.getFront();
+            statisten.dequeue();
+            // Schauen ob dieses das größte Element ist, sonst das Größte finden
+            while (!statisten.isEmpty()) {
+                //Falls aktuell > vorherig
+                if (statisten.getFront().getScore() > maxStat.getScore()) {
+                    // Das Vorherige weglegen
+                    hilfQ.enqueue(maxStat);
+                    // Neues größtes Element setzen
+                    maxStat = statisten.getFront();
+                }
+                // Sonst einfach das aktuelle größte mit dem nächsten vergleichen
+                else {
+                    hilfQ.enqueue(statisten.getFront());
+                }
+                // Darauf achten, dass man nicht endlos das Größe sucht
+                statisten.dequeue();
+            }
+            // An diesem Punkt hat man das größte Element aus Statisten gefunden (maxStat)
+            // Das größte Element aus Statisten in die ErgQ packen
+            ergQ.enqueue(maxStat);
+            // Statisten wieder füllen
+            statisten= hilfQ;
+            // hilfQ neu aufsetzen
+            hilfQ = new Queue<Statist>();
+        }
+        // ErgQ setzen, sodass
+        statisten = ergQ;
     }
 }
