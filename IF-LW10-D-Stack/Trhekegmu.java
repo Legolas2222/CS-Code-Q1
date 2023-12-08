@@ -1,7 +1,7 @@
 
 public class Trhekegmu {
     public void ausgabe_zahlenfolge(Queue<Integer> zahlenfolge) {
-        Stack<Integer> reverse_folge = new Stack<Integer>();
+        CustomStack<Integer> reverse_folge = new CustomStack<Integer>();
         System.out.println("Zahlenfolge Vorwärts: ");
         while (!zahlenfolge.isEmpty()) {
             reverse_folge.push(zahlenfolge.getFront());

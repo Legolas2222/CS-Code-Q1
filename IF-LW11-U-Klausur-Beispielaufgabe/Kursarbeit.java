@@ -1,21 +1,21 @@
-public class Kursarbeit{
+public class Kursarbeit {
     // Attribute
 
-    private Stack<Klausur> linkerStapel;
-    private Stack<Klausur> rechterStapel;
-    private Stack<Klausur> arbeitsplatz;
+    private CustomStack<Klausur> linkerStapel;
+    private CustomStack<Klausur> rechterStapel;
+    private CustomStack<Klausur> arbeitsplatz;
 
     private Notentabelle tabelle;
     // Konstruktoren
     public Kursarbeit(Notentabelle pNotentabelle){
-        this.linkerStapel = new Stack<Klausur>();
-        this.rechterStapel = new Stack<Klausur>();
-        this.arbeitsplatz = new Stack<Klausur>();
+        this.linkerStapel = new CustomStack<Klausur>();
+        this.rechterStapel = new CustomStack<Klausur>();
+        this.arbeitsplatz = new CustomStack<Klausur>();
 
         this.tabelle = pNotentabelle;
         //EIGENER CODE 
    
-    
+    }
     // Methoden
     public void neueKlausur(String pName){
 
