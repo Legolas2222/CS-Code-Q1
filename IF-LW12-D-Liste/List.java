@@ -25,17 +25,17 @@ public class List<ContentType> {
 
   /* --------- Anfang der privaten inneren Klasse -------------- */
 
-  private class ListNode<ContentType> {
+  private class ListNode<SubContentType> {
 
-    private ContentType contentObject;
-    private ListNode<ContentType> next;
+    private SubContentType contentObject;
+    private ListNode<SubContentType> next;
 
     /**
      * Ein neues Objekt wird erschaffen. Der Verweis ist leer.
      * 
      * @param pContent das Inhaltsobjekt vom Typ ContentType
      */
-    private ListNode(ContentType pContent) {
+    private ListNode(SubContentType pContent) {
       contentObject = pContent;
       next = null;
     }
@@ -45,7 +45,7 @@ public class List<ContentType> {
      * 
      * @return das Inhaltsobjekt des Knotens
      */
-    public ContentType getContentObject() {
+    public SubContentType getContentObject() {
       return contentObject;
     }
 
@@ -54,7 +54,7 @@ public class List<ContentType> {
      * 
      * @param pContent das Inhaltsobjekt vom Typ ContentType
      */
-    public void setContentObject(ContentType pContent) {
+    public void setContentObject(SubContentType pContent) {
       contentObject = pContent;
     }
 
@@ -63,7 +63,7 @@ public class List<ContentType> {
      * 
      * @return das Objekt, auf das der aktuelle Verweis zeigt
      */
-    public ListNode<ContentType> getNextNode() {
+    public ListNode<SubContentType> getNextNode() {
       return this.next;
     }
 
@@ -73,7 +73,7 @@ public class List<ContentType> {
      * 
      * @param pNext der Nachfolger des Knotens
      */
-    public void setNextNode(ListNode<ContentType> pNext) {
+    public void setNextNode(ListNode<SubContentType> pNext) {
       this.next = pNext;
     }
 

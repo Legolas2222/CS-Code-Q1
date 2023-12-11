@@ -1,4 +1,4 @@
-public class Stack<ContentType> {
+public class CustomStack<ContentType> {
   private StackNode<ContentType> head = null;
 
   public boolean isEmpty() {
