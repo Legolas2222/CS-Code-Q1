@@ -1,6 +1,6 @@
 object AddressbuchGUI: TFGUIForm
-  Left = 1024
-  Top = 350
+  Left = 1171
+  Top = 328
   BorderIcons = [biSystemMenu]
   Caption = 'Addressbuch'
   ClientHeight = 334

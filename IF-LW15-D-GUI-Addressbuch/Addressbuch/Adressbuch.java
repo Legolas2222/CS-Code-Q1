@@ -29,6 +29,16 @@ public class Adressbuch
             this.addressbuch.next();
         }
     }
+    public String alleNummern() {
+        this.addressbuch.toFirst();
+        String result = "";
+        while (this.addressbuch.hasAccess()) {
+            result += this.addressbuch.getContent().getTelefonnummer();
+            result += " \n";
+            this.addressbuch.next();
+        }
+        return result;
+    }
     public int nummerAnzeigen(String pName) {
         this.addressbuch.toFirst();
         boolean fertig = false;
@@ -45,6 +55,21 @@ public class Adressbuch
             }
         }
         return 0;
+
+    }
+    public int nummerFinden(String name) {
+        this.addressbuch.toFirst();
+        int nummer = 0;
+        while (this.addressbuch.hasAccess()) {
+            if (this.addressbuch.getContent().getName() == name) {
+                nummer = this.addressbuch.getContent().getTelefonnummer();
+            }
+            else {
+                this.addressbuch.next();
+            }
+        }
+        return nummer;
+
     }
     public void kontaktSortiertHinzufügen(String pName, int pNummer) {
         Kontakt k = new Kontakt(pNummer, pName);

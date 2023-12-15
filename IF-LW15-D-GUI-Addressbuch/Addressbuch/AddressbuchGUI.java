@@ -91,9 +91,14 @@ public class AddressbuchGUI extends JFrame {
   public void jButton2_ActionPerformed(ActionEvent evt) {
     if (this.nameField.getText() != null || this.nameField.getText() != "") {
       String name = nameField.getText();
-      int nummer = buch.nummerAnzeigen(name);
+      int nummer = buch.nummerFinden(name);
       this.output.setText(String.valueOf(nummer));
+      System.out.println(nummer);
+      this.nameField.setText("");
     }
+    else {
+         this.output.setText(this.buch.alleNummern());
+    } // end of if-else
   } // end of jButton2_ActionPerformed
 
   // Ende Methoden
