@@ -1,0 +1,55 @@
+﻿[Files]
+File0=\\SN-MNSSERVER\p.struzyna$\Dokumente\Informatik Q1\Skispringen\prototyp\Skispringen.java
+File1=\\SN-MNSSERVER\p.struzyna$\Dokumente\Informatik Q1\Skispringen\prototyp\Skispringer.java
+File2=\\SN-MNSSERVER\p.struzyna$\Dokumente\Informatik Q1\Skispringen\prototyp\Skispringerliste.java
+
+[Box:  - Skispringen]
+X=62
+Y=40
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=12
+FontName=Segoe UI
+
+[Box:  - Skispringer]
+X=20
+Y=968
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=12
+FontName=Segoe UI
+
+[Box:  - Skispringerliste]
+X=141
+Y=693
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+FontSize=12
+FontName=Segoe UI
+
+[Diagram]
+comments=0
+OffsetX=114
+OffsetY=0
+Visibility=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=1
+ShowConnections=0
+Fontname=Segoe UI
+Fontsize=12
+ShowObjectDiagram=0
+
+[Connections]
+V0=Skispringen#Skispringerliste#AssociationDirected####0#0#0###0#0
+V1=Skispringerliste#Skispringer#Aggregation####0#0#0###0#0
+
+[Interactive]
+I0=
+
