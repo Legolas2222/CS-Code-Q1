@@ -139,6 +139,9 @@ public class Skispringen extends JFrame {
       startliste1.aktuellerSkispringer().setzePunktzahl(1,80,120);
       startliste1.weiter();
     }
+    startliste1.zumAnfang();
+    
+    
   }
 
   /**
@@ -147,7 +150,27 @@ public class Skispringen extends JFrame {
   * Dabei kann der 30. Platz mehrfach vergeben sein.
   */
   public void bestimmeStartliste2() {
-    // ToDo: Quelltext einf�gen
+    this.ergebnisliste1.zumAnfang();
+    for (int i = 0; i < 50; i++) {
+      sortiertEinfügenKleinste(startliste2, ergebnisliste1.aktuellerSkispringer(), 1);
+      ergebnisliste1.weiter();
+    }
+  }
+  public void sortiertEinfügenKleinste(Skispringerliste liste, Skispringer elem, int durchgang) {
+    liste.zumAnfang();
+    while (liste.hatZugriff()) {
+      if (liste.aktuellerSkispringer().gibPunktzahl(durchgang) < elem.gibPunktzahl(durchgang)) {
+        liste.einfuegen(elem);
+      }
+    }
+  }
+  public void sortiertEinfügenGroesste(Skispringerliste liste, Skispringer elem, int durchgang) {
+    liste.zumAnfang();
+    while (liste.hatZugriff()) {
+      if (liste.aktuellerSkispringer().gibPunktzahl(durchgang) < elem.gibPunktzahl(durchgang)) {
+        liste.einfuegen(elem);
+      }
+    }
   }
 
   /**

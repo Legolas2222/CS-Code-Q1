@@ -31,7 +31,7 @@ public class Skispringerliste {
 
   /**
    * Die Liste wird als Zeichenkette geliefert.
-   * Dabei enthält jede Zeile die Daten eines Springers in der Form: Nr: Name (Gesamtpunkte, falls vorhanden).
+   * Dabei enthï¿½lt jede Zeile die Daten eines Springers in der Form: Nr: Name (Gesamtpunkte, falls vorhanden).
    */
   public String alsText() {
     String lText = "";
@@ -56,5 +56,8 @@ public class Skispringerliste {
     }
     
     return lText;
+  }
+  public boolean istLeer() {
+    return this.springerliste.isEmpty();
   }
 }
