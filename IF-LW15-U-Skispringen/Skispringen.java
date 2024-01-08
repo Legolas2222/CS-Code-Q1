@@ -140,8 +140,11 @@ public class Skispringen extends JFrame {
       startliste1.weiter();
     }
     startliste1.zumAnfang();
-    
-    
+    ergebnisliste1.zumAnfang();
+    while (startliste1.hatZugriff()) {
+      sortiertEinfügenGroesste(ergebnisliste1, startliste1.aktuellerSkispringer(), 1);
+      startliste1.weiter();
+    }
   }
 
   /**
@@ -152,26 +155,30 @@ public class Skispringen extends JFrame {
   public void bestimmeStartliste2() {
     this.ergebnisliste1.zumAnfang();
     for (int i = 0; i < 50; i++) {
-      sortiertEinfügenKleinste(startliste2, ergebnisliste1.aktuellerSkispringer(), 1);
+      //sortiertEinfügenKleinste(startliste2, ergebnisliste1.aktuellerSkispringer(), 1);
       ergebnisliste1.weiter();
     }
   }
-  public void sortiertEinfügenKleinste(Skispringerliste liste, Skispringer elem, int durchgang) {
-    liste.zumAnfang();
-    while (liste.hatZugriff()) {
-      if (liste.aktuellerSkispringer().gibPunktzahl(durchgang) < elem.gibPunktzahl(durchgang)) {
-        liste.einfuegen(elem);
-      }
-    }
-  }
+
   public void sortiertEinfügenGroesste(Skispringerliste liste, Skispringer elem, int durchgang) {
     liste.zumAnfang();
-    while (liste.hatZugriff()) {
-      if (liste.aktuellerSkispringer().gibPunktzahl(durchgang) < elem.gibPunktzahl(durchgang)) {
-        liste.einfuegen(elem);
+    if (liste.istLeer()) {
+      liste.einfuegen(elem);
+      return;
+    }
+    
+    while (liste.hatZugriff() && liste.aktuellerSkispringer().gibPunktzahl(durchgang) > elem.gibPunktzahl(durchgang)) {
+        liste.weiter();
+        if (liste.hatZugriff()) {
+          liste.einfuegen(elem);
+        }
+        else {
+          liste.anhaengen(elem);
+        }
       }
     }
-  }
+  
+  
 
   /**
   * Der zweite Durchgang wird durchgef�hrt. Jeder Skispringer erh�lt eine
