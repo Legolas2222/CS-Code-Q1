@@ -153,6 +153,7 @@ public class Skispringen extends JFrame {
       else {
         ergebnisliste1.anhaengen(startliste1.aktuellerSkispringer());
       }
+
       startliste1.weiter();
     }
   }
@@ -167,6 +168,7 @@ public class Skispringen extends JFrame {
     this.startliste2.zumAnfang();
     for (int i = 0; i < 30; i++) {
       startliste2.einfuegen(ergebnisliste1.aktuellerSkispringer());
+
       ergebnisliste1.weiter();
       startliste2.zumAnfang();
     }
@@ -174,8 +176,10 @@ public class Skispringen extends JFrame {
       startliste2.einfuegen(ergebnisliste1.aktuellerSkispringer());
       startliste2.zumAnfang();
       ergebnisliste1.weiter();
+
     }
-  }
+  
+  
 
   
 
