@@ -176,7 +176,7 @@ public class Skispringen extends JFrame {
       startliste2.einfuegen(ergebnisliste1.aktuellerSkispringer());
       startliste2.zumAnfang();
       ergebnisliste1.weiter();
-
+      }
     }
   
   
