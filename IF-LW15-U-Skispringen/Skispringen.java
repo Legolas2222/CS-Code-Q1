@@ -139,10 +139,10 @@ public class Skispringen extends JFrame {
       startliste1.weiter();
     }
     startliste1.zumAnfang();
-    ergebnisliste1.zumAnfang();
     ergebnisliste1.anhaengen(startliste1.aktuellerSkispringer());
-    startliste2.weiter();
+    startliste1.weiter();
     while (startliste1.hatZugriff()) {
+      ergebnisliste1.zumAnfang();
         while (ergebnisliste1.hatZugriff() && ergebnisliste1.aktuellerSkispringer().gibPunktzahl(1) > startliste1
           .aktuellerSkispringer().gibPunktzahl(1)) {
             ergebnisliste1.weiter();
@@ -166,29 +166,18 @@ public class Skispringen extends JFrame {
     this.ergebnisliste1.zumAnfang();
     this.startliste2.zumAnfang();
     for (int i = 0; i < 30; i++) {
-      startliste1.einfuegen(ergebnisliste1.aktuellerSkispringer());
+      startliste2.einfuegen(ergebnisliste1.aktuellerSkispringer());
       ergebnisliste1.weiter();
-      startliste1.zumAnfang();
+      startliste2.zumAnfang();
     }
-    
-  }
-
-  public void sortiertEinfügenGroesste(Skispringerliste liste, Skispringer elem, int durchgang) {
-    liste.zumAnfang();
-    if (liste.istLeer()) {
-      liste.einfuegen(elem);
-      return;
-    }
-
-    while (liste.hatZugriff() && liste.aktuellerSkispringer().gibPunktzahl(durchgang) > elem.gibPunktzahl(durchgang)) {
-      liste.weiter();
-      if (liste.hatZugriff()) {
-        liste.einfuegen(elem);
-      } else {
-        liste.anhaengen(elem);
-      }
+    while (startliste2.aktuellerSkispringer().gibPunktzahl(1) == ergebnisliste1.aktuellerSkispringer().gibPunktzahl(1)) {
+      startliste2.einfuegen(ergebnisliste1.aktuellerSkispringer());
+      startliste2.zumAnfang();
+      ergebnisliste1.weiter();
     }
   }
+
+  
 
   /**
    * Der zweite Durchgang wird durchgef�hrt. Jeder Skispringer erh�lt eine
@@ -196,19 +185,18 @@ public class Skispringen extends JFrame {
    * nach der Gesamtpunktzahl in der Ergebnisliste eingeordnet.
    */
   public void durchgang2() {
-    // ToDo: Quelltext einf�gen
     startliste2.zumAnfang();
     while (startliste2.hatZugriff()) {
       startliste2.aktuellerSkispringer().setzePunktzahl(2, startliste2.aktuellerSkispringer().gibPunktzahl(1) * 0.8f, startliste2.aktuellerSkispringer().gibPunktzahl(1) * 1.2f);
       startliste2.weiter();
     }
     startliste2.zumAnfang();
-    ergebnisliste2.zumAnfang();
     ergebnisliste2.anhaengen(startliste2.aktuellerSkispringer());
     startliste2.weiter();
     while (startliste2.hatZugriff()) {
-      while (ergebnisliste2.hatZugriff() && ergebnisliste2.aktuellerSkispringer().gibPunktzahl(2) > startliste2
-          .aktuellerSkispringer().gibPunktzahl(2)) {
+      ergebnisliste2.zumAnfang();
+        while (ergebnisliste2.hatZugriff() && ergebnisliste2.aktuellerSkispringer().gibGesamtpunktzahl() > startliste2
+          .aktuellerSkispringer().gibGesamtpunktzahl()) {
             ergebnisliste2.weiter();
           }
       if (ergebnisliste2.hatZugriff()) {
