@@ -4,7 +4,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-
 public class Skispringen extends JFrame {
   // Anfang Attribute
   private JLabel jLabel1 = new JLabel();
@@ -32,17 +31,17 @@ public class Skispringen extends JFrame {
     // Frame-Initialisierung
     super(title);
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    
-    int frameWidth = 759; 
+
+    int frameWidth = 759;
     int frameHeight = 648;
     setSize(frameWidth, frameHeight);
-    
+
     Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     int x = (d.width - getSize().width) / 2;
     int y = (d.height - getSize().height) / 2;
     setLocation(x, y);
     setResizable(false);
-    
+
     Container cp = getContentPane();
     cp.setLayout(null);
     // Anfang Komponenten
@@ -102,7 +101,7 @@ public class Skispringen extends JFrame {
     jTextAreaStart2.setEditable(false);
     jTextAreaErgebnis1.setEditable(false);
     jTextAreaErgebnis2.setEditable(false);
-    
+
     setVisible(true);
   }
 
@@ -111,14 +110,14 @@ public class Skispringen extends JFrame {
     for (int lNr = 1; lNr <= 50; lNr++) {
       startliste1.anhaengen(new Skispringer());
     }
-    
+
     jTextAreaStart1.setText(startliste1.alsText());
   }
 
   public void jButtonDruchgang1_ActionPerformed(ActionEvent evt) {
     durchgang1();
     jTextAreaErgebnis1.setText(ergebnisliste1.alsText());
-    
+
     bestimmeStartliste2();
     jTextAreaStart2.setText(startliste2.alsText());
   }
@@ -129,64 +128,89 @@ public class Skispringen extends JFrame {
   }
 
   /**
-  * Der erste Durchgang wird durchgef�hrt.
-  * Jeder Skispringer erh�lt eine zuf�llige Punktzahl zwischen 80 und 120 und
-  * wird passend in der Ergebnisliste eingeordnet.
-  */
+   * Der erste Durchgang wird durchgef�hrt.
+   * Jeder Skispringer erh�lt eine zuf�llige Punktzahl zwischen 80 und 120 und
+   * wird passend in der Ergebnisliste eingeordnet.
+   */
   public void durchgang1() {
     startliste1.zumAnfang();
     while (startliste1.hatZugriff()) {
-      startliste1.aktuellerSkispringer().setzePunktzahl(1,80,120);
+      startliste1.aktuellerSkispringer().setzePunktzahl(1, 80, 120);
       startliste1.weiter();
     }
     startliste1.zumAnfang();
-    ergebnisliste1.zumAnfang();
+    ergebnisliste1.anhaengen(startliste1.aktuellerSkispringer());
+    startliste1.weiter();
     while (startliste1.hatZugriff()) {
-      sortiertEinfügenGroesste(ergebnisliste1, startliste1.aktuellerSkispringer(), 1);
+      ergebnisliste1.zumAnfang();
+        while (ergebnisliste1.hatZugriff() && ergebnisliste1.aktuellerSkispringer().gibPunktzahl(1) > startliste1
+          .aktuellerSkispringer().gibPunktzahl(1)) {
+            ergebnisliste1.weiter();
+          }
+      if (ergebnisliste1.hatZugriff()) {
+        ergebnisliste1.einfuegen(startliste1.aktuellerSkispringer());
+      }
+      else {
+        ergebnisliste1.anhaengen(startliste1.aktuellerSkispringer());
+      }
+
       startliste1.weiter();
     }
   }
 
   /**
-  * Die Startliste f�r den zweiten Durchgang wird erzeugt. Sie besteht aus
-  * den besten 30 Springern des ersten Durchgangs in umgekehrter Reihenfolge.
-  * Dabei kann der 30. Platz mehrfach vergeben sein.
-  */
+   * Die Startliste f�r den zweiten Durchgang wird erzeugt. Sie besteht aus
+   * den besten 30 Springern des ersten Durchgangs in umgekehrter Reihenfolge.
+   * Dabei kann der 30. Platz mehrfach vergeben sein.
+   */
   public void bestimmeStartliste2() {
     this.ergebnisliste1.zumAnfang();
-    for (int i = 0; i < 50; i++) {
-      //sortiertEinfügenKleinste(startliste2, ergebnisliste1.aktuellerSkispringer(), 1);
-      ergebnisliste1.weiter();
-    }
-  }
+    this.startliste2.zumAnfang();
+    for (int i = 0; i < 30; i++) {
+      startliste2.einfuegen(ergebnisliste1.aktuellerSkispringer());
 
-  public void sortiertEinfügenGroesste(Skispringerliste liste, Skispringer elem, int durchgang) {
-    liste.zumAnfang();
-    if (liste.istLeer()) {
-      liste.einfuegen(elem);
-      return;
+      ergebnisliste1.weiter();
+      startliste2.zumAnfang();
     }
-    
-    while (liste.hatZugriff() && liste.aktuellerSkispringer().gibPunktzahl(durchgang) > elem.gibPunktzahl(durchgang)) {
-        liste.weiter();
-        if (liste.hatZugriff()) {
-          liste.einfuegen(elem);
-        }
-        else {
-          liste.anhaengen(elem);
-        }
-      }
+    while (startliste2.aktuellerSkispringer().gibPunktzahl(1) == ergebnisliste1.aktuellerSkispringer().gibPunktzahl(1)) {
+      startliste2.einfuegen(ergebnisliste1.aktuellerSkispringer());
+      startliste2.zumAnfang();
+      ergebnisliste1.weiter();
+
     }
   
+  
+
   
 
   /**
-  * Der zweite Durchgang wird durchgef�hrt. Jeder Skispringer erh�lt eine
-  * zuf�llige Punktzahl zwischen 80 % und 120 % des ersten Durchgangs und wird
-  * nach der Gesamtpunktzahl in der Ergebnisliste eingeordnet.
-  */
+   * Der zweite Durchgang wird durchgef�hrt. Jeder Skispringer erh�lt eine
+   * zuf�llige Punktzahl zwischen 80 % und 120 % des ersten Durchgangs und wird
+   * nach der Gesamtpunktzahl in der Ergebnisliste eingeordnet.
+   */
   public void durchgang2() {
-    // ToDo: Quelltext einf�gen
+    startliste2.zumAnfang();
+    while (startliste2.hatZugriff()) {
+      startliste2.aktuellerSkispringer().setzePunktzahl(2, startliste2.aktuellerSkispringer().gibPunktzahl(1) * 0.8f, startliste2.aktuellerSkispringer().gibPunktzahl(1) * 1.2f);
+      startliste2.weiter();
+    }
+    startliste2.zumAnfang();
+    ergebnisliste2.anhaengen(startliste2.aktuellerSkispringer());
+    startliste2.weiter();
+    while (startliste2.hatZugriff()) {
+      ergebnisliste2.zumAnfang();
+        while (ergebnisliste2.hatZugriff() && ergebnisliste2.aktuellerSkispringer().gibGesamtpunktzahl() > startliste2
+          .aktuellerSkispringer().gibGesamtpunktzahl()) {
+            ergebnisliste2.weiter();
+          }
+      if (ergebnisliste2.hatZugriff()) {
+        ergebnisliste2.einfuegen(startliste2.aktuellerSkispringer());
+      }
+      else {
+        ergebnisliste2.anhaengen(startliste2.aktuellerSkispringer());
+      }
+      startliste2.weiter();
+    }
   }
 
   public static void main(String[] args) {

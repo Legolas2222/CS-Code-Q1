@@ -47,7 +47,7 @@ public class Skispringer {
       return "meier";
       
       case 2:
-      return "müller";
+      return "mueller";
       
       case 3:
       return "schulze";
