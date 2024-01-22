@@ -52,7 +52,27 @@ public class Wettkampfliste implements Serializable {
   }
 
   private void bubblesort(String pDisziplin) {
-    // to do: Hier eigenen Code einfuegen
+    this.liste.toFirst();
+    boolean vertauscht = true;
+    while (vertauscht) {
+      vertauscht = false;
+      // Erstes Element als Bubble herausnehmen
+      this.liste.toFirst();
+      Wettkampfkarte aktuell = this.liste.getContent();
+      this.liste.remove();
+      // Durch die Liste aufsteigen
+      while (liste.hasAccess()) {
+        if (aktuell.gibPunkte(pDisziplin) < this.liste.getContent().gibPunkte(pDisziplin)) {
+          this.liste.next();
+        } else {
+          liste.insert(aktuell);
+          liste.next();
+          aktuell = this.liste.getContent();
+
+        }
+      }
+    }
+
   }
 
   /**
