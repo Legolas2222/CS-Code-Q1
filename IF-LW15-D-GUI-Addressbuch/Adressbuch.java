@@ -9,6 +9,13 @@ public class Adressbuch
     this.addressbuch = new List<Kontakt>();
     }
     
+    public static void main(String[] args) {
+        Adressbuch a = new Adressbuch();
+        a.kontaktHinzufügen("A", 1231142);
+        a.kontaktHinzufügen("B", 1231143);
+        a.alleNummernAnzeigen();
+        a.nummerAnzeigen("B");
+    }
     
     //Methoden
     public void kontaktHinzufügen(String pName, int pNummer) {
