@@ -68,7 +68,12 @@ public class BinaryTree<ContentType> {
    *                 das Inhaltsobjekt des Wurzelknotens vom Typ ContentType
    */
   public BinaryTree(ContentType pContent) {
-    this.node = new BTNode<ContentType>(pContent); 
+    if (pContent != null) {
+      this.node = new BTNode<ContentType>(pContent); 
+    }
+    else {
+      this.node = new BTNode<ContentType>();
+    }
   }
 
   /**
@@ -87,7 +92,14 @@ public class BinaryTree<ContentType> {
    *                   der rechte Teilbaum vom Typ BinaryTree<ContentType>
    */
   public BinaryTree(ContentType pContent, BinaryTree<ContentType> pLeftTree, BinaryTree<ContentType> pRightTree) {
-    this.node = new BTNode<ContentType>(pContent, pLeftTree, pRightTree); 
+    if (pContent != null) {
+      if (pLeftTree != null && pRightTree != null) {
+        this.node = new BTNode<ContentType>(pContent, pLeftTree, pRightTree); 
+      }
+      else {
+        this.node = new BTNode<ContentType>(pContent);
+      }
+    }
   }
 
   /**
