@@ -1,5 +1,7 @@
+package com.binary.tree.custom;
+
 public class BinaryTreeCustom<ContentType> {
-    private BTNode node;
+    private BTNode<ContentType> node;
     
     public BinaryTreeCustom(ContentType value) {
         this.node = new BTNode<ContentType>(value);

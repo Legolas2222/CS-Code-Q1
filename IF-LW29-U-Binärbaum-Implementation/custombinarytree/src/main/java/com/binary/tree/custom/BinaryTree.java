@@ -1,3 +1,4 @@
+package com.binary.tree.custom;
 
 /**
  * <p>
@@ -29,17 +30,17 @@ public class BinaryTree<ContentType> {
    */
   private class BTNode<CT> {
     public CT content;
-    public BinaryTreeCustom<ContentType> left;
-    public BinaryTreeCustom<ContentType> right;
+    public BinaryTree<ContentType> left;
+    public BinaryTree<ContentType> right;
 
     public BTNode(CT value) {
       this.content = value;
     }
 
-    public BTNode(CT value, BinaryTreeCustom<ContentType> left, BinaryTreeCustom<ContentType> right) {
+    public BTNode(CT value, BinaryTree<ContentType> pLeftTree, BinaryTree<ContentType> pRightTree) {
       this.content = value;
-      this.left = left;
-      this.right = right;
+      this.left = pLeftTree;
+      this.right = pRightTree;
     }
 
     public BTNode() {
@@ -49,7 +50,7 @@ public class BinaryTree<ContentType> {
 
   /* ----------- Ende der privaten inneren Klasse -------------- */
 
-  private BTNode node;
+  private BTNode<ContentType> node;
   /**
    * Nach dem Aufruf des Konstruktors existiert ein leerer Binaerbaum.
    */
