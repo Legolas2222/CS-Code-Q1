@@ -1,5 +1,7 @@
 package com.binary.tree.custom;
 
+import javax.swing.text.AbstractDocument.Content;
+
 /**
  * <p>
  * Materialien zu den zentralen NRW-Abiturpruefungen im Fach Informatik ab 2017.
@@ -19,7 +21,7 @@ package com.binary.tree.custom;
  *         Materialien zum schulinternen Lehrplan Informatik SII
  * @version Generisch_03 2014-03-01
  */
-public class BinaryTree<ContentType> {
+public class BinaryTree<ContentType>{
 
   /* --------- Anfang der privaten inneren Klasse -------------- */
 
@@ -211,6 +213,51 @@ public class BinaryTree<ContentType> {
       return null;
     }
     return this.node.right;
+  }
+
+  public void preOrder(BinaryTree<ContentType> pTree) {
+    // Root
+    if (pTree.getContent() != null) {
+      System.out.println(pTree.getContent()); 
+    }
+    // Left
+    if (pTree.getLeftTree() != null) {
+      preOrder(pTree.getLeftTree());
+    }
+    // Right
+    if (pTree.getRightTree() != null) {
+      preOrder(pTree.getRightTree());
+    }
+  }
+
+  public void inOrder(BinaryTree<ContentType> pTree) {
+    // Left
+    if (pTree.getLeftTree() != null) {
+      inOrder(pTree.getLeftTree());
+    }
+    // Root
+    if (pTree.getContent() != null) {
+      System.out.println(pTree.getContent()); 
+    }
+    // Right
+    if (pTree.getRightTree() != null) {
+      inOrder(pTree.getRightTree());
+    }
+  }
+
+  public void postOrder(BinaryTree<ContentType> pTree) {
+    // Left
+    if (pTree.getLeftTree() != null) {
+      postOrder(pTree.getLeftTree());
+    }
+    // Left
+    if (pTree.getRightTree() != null) {
+      postOrder(pTree.getRightTree());
+    }
+    // Root
+    if (pTree.getContent() != null) {
+      System.out.println(pTree.getContent()); 
+    }
   }
 
 }

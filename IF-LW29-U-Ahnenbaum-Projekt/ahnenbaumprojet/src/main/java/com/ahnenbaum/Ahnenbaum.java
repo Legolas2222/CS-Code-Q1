@@ -9,23 +9,39 @@ public class Ahnenbaum {
         this.lisasAhnenbaum = new BinaryTree<Ahne>();
     }
 
-    public static void main(String[] args) {
-        Ahnenbaum a = new Ahnenbaum();
+    public void setUpTopDown() {
+        
         // Lisa
-        a.lisasAhnenbaum.setContent(new Ahne("Lisa", "Simpson", 'w'));
+        this.lisasAhnenbaum.setContent(new Ahne("Lisa", "Simpson", 'w'));
 
         // Homer
-        a.lisasAhnenbaum.setLeftTree(new BinaryTree<Ahne>(new Ahne("Homer", "Simpson", 'm')));
+        this.lisasAhnenbaum.setLeftTree(new BinaryTree<Ahne>(new Ahne("Homer", "Simpson", 'm')));
 
         // Homers Eltern
-        a.lisasAhnenbaum.getLeftTree().setLeftTree(new BinaryTree<Ahne>(new Ahne("Abraham", "Simpson", 'm')));
-        a.lisasAhnenbaum.getLeftTree().setRightTree(new BinaryTree<Ahne>(new Ahne("Mona", "Simpson", 'w')));
+        this.lisasAhnenbaum.getLeftTree().setLeftTree(new BinaryTree<Ahne>(new Ahne("Abraham", "Simpson", 'm')));
+        this.lisasAhnenbaum.getLeftTree().setRightTree(new BinaryTree<Ahne>(new Ahne("Mona", "Simpson", 'w')));
 
         // Marge
-        a.lisasAhnenbaum.setRightTree(new BinaryTree<Ahne>(new Ahne("Marge", "Simpson", 'w')));
+        this.lisasAhnenbaum.setRightTree(new BinaryTree<Ahne>(new Ahne("Marge", "Simpson", 'w')));
 
         // Marges Eltern
-        a.lisasAhnenbaum.getRightTree().setLeftTree(new BinaryTree<Ahne>(new Ahne("Clancy", "Bouvier", 'm')));
-        a.lisasAhnenbaum.getRightTree().setRightTree(new BinaryTree<Ahne>(new Ahne("Jacqueline", "Bouvier", 'w')));
+        this.lisasAhnenbaum.getRightTree().setLeftTree(new BinaryTree<Ahne>(new Ahne("Clancy", "Bouvier", 'm')));
+        this.lisasAhnenbaum.getRightTree().setRightTree(new BinaryTree<Ahne>(new Ahne("Jacqueline", "Bouvier", 'w')));
+    }
+
+    public void setUpBottomUp() {
+        BinaryTree<Ahne> jacqueline = new BinaryTree<Ahne>(new Ahne("Jacqueline", "Bouvier", 'w'));
+        BinaryTree<Ahne> clancy = new BinaryTree<Ahne>(new Ahne("Clancy", "Bouvier", 'm'));
+
+        BinaryTree<Ahne> marge = new BinaryTree<Ahne>(null, jacqueline, clancy);
+
+        BinaryTree<Ahne> mona = new BinaryTree<Ahne>(new Ahne("Mona", "Simpson", 'w'));
+        BinaryTree<Ahne> abraham = new BinaryTree<Ahne>(new Ahne("Abraham", "Simpson", 'm'));
+
+        BinaryTree<Ahne> homer = new BinaryTree<Ahne>(new Ahne("Homer", "Simpson", 'm'), mona, abraham);
+
+        BinaryTree<Ahne> lisa = new BinaryTree<Ahne>(new Ahne("Lisa", "Simpson", 'w'), homer, marge);
+
+        this.lisasAhnenbaum = lisa;
     }
 }
