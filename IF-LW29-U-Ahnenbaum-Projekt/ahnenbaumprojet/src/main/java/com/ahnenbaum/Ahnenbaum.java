@@ -1,9 +1,10 @@
 package com.ahnenbaum;
-import com.binary.tree.custom.BinaryTree;
 
+import com.binary.tree.custom.BinaryTree;
 
 public class Ahnenbaum {
     public BinaryTree<Ahne> lisasAhnenbaum;
+
     public Ahnenbaum() {
         this.lisasAhnenbaum = new BinaryTree<Ahne>();
     }
@@ -13,8 +14,8 @@ public class Ahnenbaum {
         // Lisa
         a.lisasAhnenbaum.setContent(new Ahne("Lisa", "Simpson", 'w'));
 
-        // Homer 
-        a.lisasAhnenbaum.setLeftTree(new BinaryTree<Ahne>(new Ahne("Homer", "Simpson", 'm')));  
+        // Homer
+        a.lisasAhnenbaum.setLeftTree(new BinaryTree<Ahne>(new Ahne("Homer", "Simpson", 'm')));
 
         // Homers Eltern
         a.lisasAhnenbaum.getLeftTree().setLeftTree(new BinaryTree<Ahne>(new Ahne("Abraham", "Simpson", 'm')));
