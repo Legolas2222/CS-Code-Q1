@@ -51,16 +51,12 @@ public class Morsecodebaum{
 
     public void testDecode(String s){
         System.out.print("Decodiert mit print:  " + s + "   ->   ");
-        morsezeichenDecodieren(morsecodebaum, s);
-        System.out.println();
-        //System.out.println("Decodiert mit return: " + s + "   ->   " + decode(morsecodebaum, s));
-        System.out.println();
-        //System.out.println("Decodiert mehrere Buchstaben: " + s + "   ->   " + morseCodeDecodieren(s));
+        morseZeichenDecodierenUnterricht(this.morsecodebaum, s);
     }
     
     //HA zum 17.04.:
     //Morsecode für einen Buchstaben decodieren und mit print ausgeben
-    public void morsezeichenDecodieren(BinaryTree<String> b, String code){
+    public void morseZeichenDecodieren(BinaryTree<String> b, String code){
         char[] elements = code.toCharArray();
         BinaryTree<String> current = b;
         for (int i = 0; i < elements.length; i++) {
@@ -84,6 +80,35 @@ public class Morsecodebaum{
             }
         }
         System.out.print(current.getContent());
+    }
+
+    public void morseZeichenDecodierenUnterricht(BinaryTree<String> b, String code) {
+        if(code.length() == 0) {
+            System.out.print(b.getContent());
+        }
+        else {
+            if (code.charAt(0) == '.') {
+                morseZeichenDecodierenUnterricht(b.getLeftTree(), code.substring(1));
+            }
+            else if (code.charAt(0) == '-') {
+                morseZeichenDecodierenUnterricht(b.getRightTree(), code.substring(1));
+            }
+        }
+    }
+    public String morseZeichenDecodierenUnterrichtS(BinaryTree<String> b, String code) {
+        if(code.length() == 0) {
+            return(b.getContent());
+        }
+        else {
+            if (code.charAt(0) == '.') {
+                return morseZeichenDecodierenUnterrichtS(b.getLeftTree(), code.substring(1));
+            }
+            else if (code.charAt(0) == '-') {
+                return morseZeichenDecodierenUnterrichtS(b.getRightTree(), code.substring(1));
+            }
+            
+        }
+        return "";
     }
 
     //HA zum 17.04.:
@@ -120,7 +145,7 @@ public class Morsecodebaum{
         String[] letterCodes = code.split(" ");
         String[] result = new String[letterCodes.length]; 
         for (int i = 0; i < letterCodes.length; i++) {
-            result[i] = decode(morsecodebaum, letterCodes[i]);
+            result[i] = morseZeichenDecodierenUnterrichtS(morsecodebaum, letterCodes[i]);
         }
         return result.toString();
     }
