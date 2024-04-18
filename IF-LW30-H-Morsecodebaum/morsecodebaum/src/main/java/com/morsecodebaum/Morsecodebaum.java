@@ -5,6 +5,10 @@ public class Morsecodebaum{
     
     private BinaryTree<String> morsecodebaum;
 
+    public BinaryTree<String> getMorsecodebaum() {
+        return morsecodebaum;
+    }
+
     public Morsecodebaum(){
         BinaryTree<String>[] b = new BinaryTree[40];
         b[0]=new BinaryTree<String>("5");
@@ -51,115 +55,90 @@ public class Morsecodebaum{
 
     public void testDecode(String s){
         System.out.print("Decodiert mit print:  " + s + "   ->   ");
-        morseZeichenDecodierenUnterricht(this.morsecodebaum, s);
+        morsezeichenDecodieren(this.morsecodebaum, s);
     }
     
     //HA zum 17.04.:
     //Morsecode für einen Buchstaben decodieren und mit print ausgeben
-    public void morseZeichenDecodieren(BinaryTree<String> b, String code){
-        char[] elements = code.toCharArray();
-        BinaryTree<String> current = b;
-        for (int i = 0; i < elements.length; i++) {
-            if (elements[i] == '.') {
-                if (current.getLeftTree() != null) {
-                    current = current.getLeftTree();
-                }
-                else {
-                    System.out.println("Fehler, Morsecode gehört nicht zu einem Eintrag im Baum");
-                    break;
-                }
-            }
-            if (elements[i] == '-') {
-                if (current.getRightTree() != null) {
-                    current = current.getRightTree();    
-                }
-                else {
-                    System.out.println("Fehler, Morsecode gehört nicht zu einem Eintrag im Baum");
-                    break;
-                }
-            }
-        }
-        System.out.print(current.getContent());
-    }
-
-    public void morseZeichenDecodierenUnterricht(BinaryTree<String> b, String code) {
-        if(code.length() == 0) {
-            System.out.print(b.getContent());
-        }
-        else {
-            if (code.charAt(0) == '.') {
-                morseZeichenDecodierenUnterricht(b.getLeftTree(), code.substring(1));
-            }
-            else if (code.charAt(0) == '-') {
-                morseZeichenDecodierenUnterricht(b.getRightTree(), code.substring(1));
-            }
-        }
-    }
-    public String morseZeichenDecodierenUnterrichtS(BinaryTree<String> b, String code) {
-        if(code.length() == 0) {
-            return(b.getContent());
-        }
-        else {
-            if (code.charAt(0) == '.') {
-                return morseZeichenDecodierenUnterrichtS(b.getLeftTree(), code.substring(1));
-            }
-            else if (code.charAt(0) == '-') {
-                return morseZeichenDecodierenUnterrichtS(b.getRightTree(), code.substring(1));
-            }
-            
-        }
-        return "";
-    }
-
-    //HA zum 17.04.:
-    //Morsecode für einen Buchstaben decodieren und zurückgeben
-    public String decode(BinaryTree<String> b, String code){
-        char[] elements = code.toCharArray();
-        BinaryTree<String> current = b;
-        for (int i = 0; i < elements.length; i++) {
-            if (elements[i] == '.') {
-                if (current.getLeftTree() != null) {
-                    current = current.getLeftTree();
-                }
-                else {
-                    System.out.println("Fehler, Morsecode gehört nicht zu einem Eintrag im Baum");
-                    break;
-                }
-            }
-            if (elements[i] == '-') {
-                if (current.getRightTree() != null) {
-                    current = current.getRightTree();    
-                }
-                else {
-                    System.out.println("Fehler, Morsecode gehört nicht zu einem Eintrag im Baum");
-                    break;
-                }
-            }
-        }
-        return current.getContent();
-    }    
     
-    //HA zum 17.04.:
-    //Decodiert mehrere Buchstaben
-    public String morseCodeDecodieren(String code){
-        String[] letterCodes = code.split(" ");
-        String[] result = new String[letterCodes.length]; 
-        for (int i = 0; i < letterCodes.length; i++) {
-            result[i] = morseZeichenDecodierenUnterrichtS(morsecodebaum, letterCodes[i]);
+
+    public void morsezeichenDecodieren(BinaryTree<String> b, String code){
+        if (code.length()==0)
+            System.out.println(b.getContent());
+        else{
+            if (code.charAt(0)=='.')
+                morsezeichenDecodieren(b.getLeftTree(), code.substring(1));
+            else
+                morsezeichenDecodieren(b.getRightTree(), code.substring(1));                
         }
-        return result.toString();
     }
+
+    public String decode(BinaryTree<String> b, String code){
+        if (code.length()==0)
+            return(b.getContent());
+        else{
+            if (code.charAt(0)=='.')
+                return decode(b.getLeftTree(), code.substring(1));
+            else if (code.charAt(0)=='-')
+                return decode(b.getRightTree(), code.substring(1));                
+            else
+                return "fehlerhafter Code";
+        }
+    }    
+
+    public String morseCodeDecodieren(String code){
+        String[] c = code.split(" ");
+        String wort = "";
+        for (int i=0; i<c.length; i++){
+            wort = wort + decode(morsecodebaum, c[i]);
+        }
+        return wort;
+    }
+
+    //HA für den 19.04.
+    //
+    public void starteMorsecodebaumTraversierung(){
+        //EIGENER CODE???
+    }  
+
+    //HA für den 19.04.
+    //Ausgabe des gesamten Inhalts des Baums nach einem Traversierungsalgorithmus
+    public void morsecodebaumTraversierung(BinaryTree<String> pTree){
+        System.out.println("Preorder: ");
+        pTree.preOrder(pTree);
+        System.out.println("InOrder: ");
+        pTree.inOrder(pTree);
+        System.out.println("PostOrder: ");
+        pTree.postOrder(pTree);
+
+    }    
 
     //
     //
     public void morseCodieren(String pText){
-        //EIGENER CODE
+        pText = pText.toUpperCase();
+        char[] c = pText.toCharArray();
+        for (int i = 0; i < c.length; i++) {
+            erzeugeMorsecode(c[i], this.getMorsecodebaum(), "");
+            System.out.print(" ");
+        }
     }  
 
     //
     //
     public void erzeugeMorsecode(char pZeichen, BinaryTree<String> pTree, String pCode){
-        //EIGENER CODE
+        if (pTree.getContent() == null) {
+            return;
+        }
+        if (pZeichen == pTree.getContent().charAt(0))
+            System.out.print(pCode);
+        else{
+            if (pTree.getLeftTree()!=null)
+                erzeugeMorsecode(pZeichen, pTree.getLeftTree(), pCode+".");
+            if (pTree.getRightTree()!=null)
+                erzeugeMorsecode(pZeichen, pTree.getRightTree(), pCode+"-");
+            
+        }
     }    
 
 }
