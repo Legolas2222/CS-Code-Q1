@@ -124,6 +124,17 @@ public class Morsecodebaum{
         }
     }  
 
+    public String morseCodierenS(String pText){
+        pText = pText.toUpperCase();
+        char[] c = pText.toCharArray();
+        String result = "";
+        for (int i = 0; i < c.length; i++) {
+            result = result + erzeugeMorsecodeS(c[i], this.getMorsecodebaum(), "");
+        }
+        return result;
+    }  
+
+
     //
     //
     public void erzeugeMorsecode(char pZeichen, BinaryTree<String> pTree, String pCode){
@@ -139,6 +150,22 @@ public class Morsecodebaum{
                 erzeugeMorsecode(pZeichen, pTree.getRightTree(), pCode+"-");
             
         }
+    }    
+
+    public String erzeugeMorsecodeS(char pZeichen, BinaryTree<String> pTree, String pCode){
+        if (pTree.getContent() == null) {
+            return "";
+        }
+        if (pZeichen == pTree.getContent().charAt(0))
+            return pCode;
+        else{
+            if (pTree.getLeftTree()!=null)
+                return erzeugeMorsecodeS(pZeichen, pTree.getLeftTree(), pCode+".");
+            if (pTree.getRightTree()!=null)
+                return erzeugeMorsecodeS(pZeichen, pTree.getRightTree(), pCode+"-");
+            
+        }
+        return "";
     }    
 
 }
