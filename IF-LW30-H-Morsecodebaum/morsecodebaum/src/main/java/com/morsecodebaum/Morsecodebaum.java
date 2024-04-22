@@ -123,6 +123,7 @@ public class Morsecodebaum{
             System.out.print(" ");
         }
     }  
+
     public String morseCodierenS(String pText){
         pText = pText.toUpperCase();
         char[] c = pText.toCharArray();
@@ -132,6 +133,7 @@ public class Morsecodebaum{
         }
         return result;
     }  
+
 
     //
     //

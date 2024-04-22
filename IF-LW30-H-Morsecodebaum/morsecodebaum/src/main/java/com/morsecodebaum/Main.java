@@ -1,5 +1,7 @@
 package com.morsecodebaum;
 
+import com.morsecodebaum.Morsecodebaum;
+
 public class Main {
     public static void main(String[] args) {
         Morsecodebaum m = new Morsecodebaum();
@@ -8,5 +10,6 @@ public class Main {
         //m.morseCodieren("Hallo Welt");
         m.erzeugeMorsecodeS('K', m.getMorsecodebaum(), "");
         //System.out.println(m.morseCodierenS("Hallo Welt"));
+
     }
 }
