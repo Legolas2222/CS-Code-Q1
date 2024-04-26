@@ -16,6 +16,11 @@ public class Suchbaum {
         return null;
     }
 
+
+
+    
+
+
     public static void Einfuegen(String name, BinaryTree<String> baum) {
         if (name == null || baum == null) {
             return;
