@@ -13,7 +13,7 @@ public interface ComparableContent<ContentType> {
    * @return true, wenn das aufrufende Objekt groesser ist als das Objekt
    *         pContent, sonst false
    */
-  public boolean  isGreater(ContentType pContent);
+  public boolean isGreater(ContentType pContent);
 
   /**
    * Wenn festgestellt wird, dass das Objekt, von dem die Methode aufgerufen

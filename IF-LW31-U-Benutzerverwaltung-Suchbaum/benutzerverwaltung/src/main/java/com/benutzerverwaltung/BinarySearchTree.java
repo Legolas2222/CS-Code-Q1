@@ -1,6 +1,5 @@
 package com.benutzerverwaltung;
 
-import javax.swing.text.AbstractDocument.Content;
 
 /**
  * <p>
@@ -43,24 +42,7 @@ public class BinarySearchTree<ContentType extends ComparableContent<ContentType>
   private class BSTNode<CT extends ComparableContent<CT>> {
     
     private CT content;
-
-    public CT getContent() {
-      return content;
-    }
-
-    public void setContent(CT content) {
-      this.content = content;
-    }
-
     private BinarySearchTree<CT> left, right;
-
-    public BinarySearchTree<CT> getRight() {
-      return right;
-    }
-
-    public BinarySearchTree<CT> getLeft() {
-      return left;
-    }
 
     public BSTNode(CT pContent) {
       // Der Knoten hat einen linken und rechten Teilbaum, die 
@@ -81,7 +63,7 @@ public class BinarySearchTree<ContentType extends ComparableContent<ContentType>
    * Der Konstruktor erzeugt einen leeren Suchbaum.
    */
   public BinarySearchTree() {
-    this.node = null;
+        this.node = null;
   }
 
   /**
@@ -110,25 +92,19 @@ public class BinarySearchTree<ContentType extends ComparableContent<ContentType>
    *            
    */
   public void insert(ContentType pContent) {
-    if (pContent == null) {
-      return;
-    }
-    boolean fertig = false;
-    BinarySearchTree<ContentType> baum = this;
-    while (!fertig) {
-      if (pContent.isEqual(baum.getContent())) {
-        fertig = true;
-      }
-      else if (baum.isEmpty()) {
-        baum.node = new BSTNode<ContentType>(pContent);
-        fertig = true;
-      }
-      else if (pContent.isLess(baum.getContent())) {
-        baum = baum.getLeftTree();
-      }
-      else if (pContent.isGreater(baum.getContent())) {
-        baum = baum.getRightTree();
-      }
+    if(pContent != null){
+        if (isEmpty()) {
+          node = new BSTNode<ContentType>(pContent);
+        }
+        else if (pContent.isLess(node.content)) {
+          node.left.insert(pContent);
+        }
+        else if (pContent.isGreater(node.content)) {
+          node.right.insert(pContent);
+        }
+        else {
+          return;
+        }
     }
   }
 
@@ -141,7 +117,10 @@ public class BinarySearchTree<ContentType extends ComparableContent<ContentType>
    *         
    */
   public BinarySearchTree<ContentType> getLeftTree() {
-    return this.node.getLeft();
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.node.left;
   }
 
   /**
@@ -156,7 +135,7 @@ public class BinarySearchTree<ContentType extends ComparableContent<ContentType>
     if (this.isEmpty()) {
       return null;
     }
-    return this.node.getContent();
+    return this.node.content;
   }
 
   /**
@@ -168,10 +147,10 @@ public class BinarySearchTree<ContentType extends ComparableContent<ContentType>
    *         
    */
   public BinarySearchTree<ContentType> getRightTree() {
-    if (this.node.getLeft() == null) {
+    if (this.isEmpty()) {
       return null;
     }
-    return this.node.getLeft();
+    return this.node.right;
   }
 
   /**
@@ -238,20 +217,18 @@ public class BinarySearchTree<ContentType extends ComparableContent<ContentType>
    * 
    */
   public ContentType search(ContentType pContent) {
-    return search(pContent, this);
-  }
-
-  private ContentType search(ContentType pContent, BinarySearchTree<ContentType> pTree) {
-    if (pContent == null || pTree == null || pTree.isEmpty()) {
-      return null;
+    if (pContent != null &&  !isEmpty()) {
+      if (pContent.equals(node.content)) {
+        return node.content;
+      }
+      else if (pContent.isLess(node.content)) {
+        node.left.search(pContent);
+      }
+      else if (pContent.isGreater(node.content)) {
+        node.right.search(pContent);
+      }
     }
-    else if (pContent.isEqual(pTree.getContent())) {
-      return pTree.getContent();
-    }
-    else if (pContent.isLess(pTree.getContent())) {
-      return search(pContent, pTree.getLeftTree());
-    }
-    return search(pContent, pTree.getRightTree());
+    return null;
   }
 
   /* ----------- Weitere private Methoden -------------- */

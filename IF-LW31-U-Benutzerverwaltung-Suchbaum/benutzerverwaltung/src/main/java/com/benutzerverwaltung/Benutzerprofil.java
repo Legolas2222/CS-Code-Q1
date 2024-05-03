@@ -3,21 +3,31 @@ package com.benutzerverwaltung;
 public class Benutzerprofil implements ComparableContent<Benutzerprofil>{
 
     private String name;
-
-    public String getName() {
+    private int pass;
+    
+    public Benutzerprofil (String pName, int pPass){
+        name = pName;
+        pass = pPass;
+    }
+    
+    public String getName(){
         return name;
     }
-    private int pass;
-        
-    public boolean isLess(Benutzerprofil pContent) {
-        return this.name.compareToIgnoreCase(pContent.getName()) < 0;
+    
+    public int getPass(){
+        return pass;
     }
-    public boolean isGreater(Benutzerprofil pContent) {
-        return this.name.compareToIgnoreCase(pContent.getName()) > 0;
+    
+    public boolean isGreater(Benutzerprofil pBenutzerprofil){
+        return this.getName().compareTo(pBenutzerprofil.getName()) > 0;
     }
-
-    public boolean isEqual(Benutzerprofil pContent) {
-        return this.name.equals(pContent.getName());
+    
+    public boolean isLess(Benutzerprofil pBenutzerprofil){
+        return this.getName().compareTo(pBenutzerprofil.getName()) < 0;
     }
+    
+    public boolean isEqual(Benutzerprofil pBenutzerprofil){
+        return this.getName().compareTo(pBenutzerprofil.getName()) == 0;
+    } 
     
 }
