@@ -17,13 +17,9 @@ public class Benutzerverwaltung {
         }
     }
 
-    public void BenutzerLoeschen(Benutzerprofil pUser) {
-        if (Userbaum.search(pUser) != null) {
-            Userbaum.remove(pUser);
-        }
-        else {
-            System.out.println("Benutzer nicht vorhanden");
-        }
+    public void BenutzerLoeschen(String userName) {
+        Benutzerprofil UserToDelete = new Benutzerprofil(userName, -1 );
+        Userbaum.remove(UserToDelete);
     }
 
     public Benutzerprofil BenutzerFinden(String userName) {
@@ -39,5 +35,14 @@ public class Benutzerverwaltung {
         return false;
     }
 
+    public void PasswortAendern(String userName, int altesPasswort, int neuesPasswort)
+    {
+        Benutzerprofil User = BenutzerFinden(userName);
+        if (User != null) {
+            if (PasswortPruefen(userName, altesPasswort)) {
+                User.setPass(neuesPasswort);
+            }
+        }
+    }
 }
 

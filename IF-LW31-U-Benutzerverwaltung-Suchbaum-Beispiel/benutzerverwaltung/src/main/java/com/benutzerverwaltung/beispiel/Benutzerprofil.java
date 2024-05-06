@@ -5,6 +5,10 @@ public class Benutzerprofil implements ComparableContent<Benutzerprofil>{
     private String name;
     private int pass;
     
+    public void setPass(int pass) {
+        this.pass = pass;
+    }
+
     public Benutzerprofil (String pName, int pPass){
         name = pName;
         pass = pPass;
