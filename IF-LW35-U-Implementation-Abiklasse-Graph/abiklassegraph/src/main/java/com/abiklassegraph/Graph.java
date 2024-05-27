@@ -65,7 +65,7 @@ public class Graph{
 
   /**
    * Die Anfrage liefert das Knotenobjekt mit pID als ID. Ist ein solchen Knotenobjekt nicht im Graphen enthalten,
-   * wird null zurueckgeliefert.
+   * wird null zurueckgeliefert.,
    */
   public Vertex getVertex(String pID){
     vertices.toFirst();
