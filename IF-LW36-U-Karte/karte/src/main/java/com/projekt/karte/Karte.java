@@ -1,3 +1,4 @@
+package com.projekt.karte;
  public class Karte{
     //Attribute
     private Graph karte;    
