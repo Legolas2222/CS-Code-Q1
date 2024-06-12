@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:nsd="https://structorizer.fisch.lu" version="3.32-19" preRepeat="until " postFor="to" preReturn="return" postForIn="in" preWhile="while " output="OUTPUT" input="INPUT" preFor="for" preExit="exit" preLeave="leave" ignoreCase="true" preThrow="throw" preForIn="foreach" stepFor="by" author="p.struzyna" created="2024-06-10" changedby="p.struzyna" changed="2024-06-12" origin="Structorizer 3.32-19" text="&#34;Dijkstra(von, nach)&#34;" comment="" color="ffffff" type="program" style="nice">
+	<children>
+		<for text="&#34;für alle Kanten im Graphen&#34;" comment="" counterVar="dummy_counter" startValue="für alle Kanten im Graphen" stepConst="1" style="FREETEXT" color="ffffff" disabled="0">
+			<qFor>
+				<instruction text="&#34;setze Gewicht auf Integer.MAX&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qFor>
+		</for>
+		<instruction text="&#34;setze Startknoten Gewicht auf 0&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<alternative text="&#34;(wenn alle knoten markiert)&#34;" comment="" color="ffffff" disabled="0">
+			<qTrue>
+				<instruction text="&#34;gebe Distanz zurück&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qTrue>
+			<qFalse>
+				<instruction text="&#34;continue&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qFalse>
+		</alternative>
+		<for text="&#34;für alle Nachbarn des aktuellen knoten&#34;" comment="&#34;&#34;" counterVar="dummy_counter" startValue="für alle Nachbarn des aktuellen knoten" stepConst="1" style="FREETEXT" color="ffffff" disabled="0">
+			<qFor>
+				<alternative text="&#34;(Kosten des Nachbars &#62; Aktuelle Kosten + Kosten zum Nachbarn)&#34;" comment="&#34;&#34;" color="ffffff" disabled="0">
+					<qTrue>
+						<instruction text="&#34;continue&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qTrue>
+					<qFalse>
+						<instruction text="&#34;Setze neue Kosten auf: Aktuelle Kosten + Kosten zum Nachbarn&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qFalse>
+				</alternative>
+			</qFor>
+		</for>
+		<while text="&#34;solange es unmarkiert Knoten gibt&#34;" comment="" color="ffffff" disabled="0">
+			<qWhile>
+				<instruction text="&#34;suche den günstigsten Knoten&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+				<instruction text="&#34;markiere diesen&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+				<instruction text="&#34;Dijkstra(Aktueller Knoten, nach)&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+			</qWhile>
+		</while>
+	</children>
+</root>
