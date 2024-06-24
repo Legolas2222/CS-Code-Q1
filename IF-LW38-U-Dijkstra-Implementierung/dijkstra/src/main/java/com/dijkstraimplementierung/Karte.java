@@ -150,9 +150,28 @@ public class Karte {
     return false;
   }
 
+  private boolean tiefenSucheUnterricht(Vertex k, String nachId) {
+    k.setMark(true);
+    // Rekursionsbedingung
+    if (k.getID().equals(nachId)) {
+      return true;
+    }
+    // Durch die Nachbarn durch gehen
+    List<Vertex> nachbarn = karte.getNeighbours(k);
+    for(nachbarn.toFirst(); nachbarn.hasAccess(); nachbarn.next()) {
+      if (!nachbarn.getContent().isMarked()) {
+        // Ergebnis der Rekursion nach oben durch geben
+        if(tiefenSucheUnterricht(nachbarn.getContent(), nachId)) {
+          return true;}
+      }
+    }
+    return false;
+
+  }
+
   public void tiefenSuche(String startId, String nachId) {
     karte.setAllEdgeMarks(false);
-    boolean result =  tiefenSuche(karte.getVertex(startId), nachId);
+    boolean result =  tiefenSucheUnterricht(karte.getVertex(startId), nachId);
     System.out.println(result);
   }
 

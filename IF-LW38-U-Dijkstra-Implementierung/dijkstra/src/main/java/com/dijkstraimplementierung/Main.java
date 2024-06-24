@@ -4,6 +4,6 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
         Karte k = new Karte();
-        k.tiefenSuche("München", "Stuttgart");
+        k.tiefenSuche("Berlin", "Köln");
     }
 }
