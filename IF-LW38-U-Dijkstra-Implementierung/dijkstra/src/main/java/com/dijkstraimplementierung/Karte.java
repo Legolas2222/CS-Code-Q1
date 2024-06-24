@@ -133,4 +133,27 @@ public class Karte {
     karte.addEdge(new Edge(v1, v2, laenge));
   }
 
+  private boolean tiefenSuche(Vertex current, String suchId) {
+    if (current.getID().equals(suchId)) {
+      return true;
+    }
+    current.setMark(true);
+    List<Vertex> nachbarn  = karte.getNeighbours(current);
+    nachbarn.toFirst();
+    while (nachbarn.hasAccess()) {
+      if (!nachbarn.getContent().isMarked()) {
+        tiefenSuche(nachbarn.getContent(), suchId);
+        System.out.println(nachbarn.getContent().getID());
+      }
+      nachbarn.next();
+    }
+    return false;
+  }
+
+  public void tiefenSuche(String startId, String nachId) {
+    karte.setAllEdgeMarks(false);
+    boolean result =  tiefenSuche(karte.getVertex(startId), nachId);
+    System.out.println(result);
+  }
+
 }
