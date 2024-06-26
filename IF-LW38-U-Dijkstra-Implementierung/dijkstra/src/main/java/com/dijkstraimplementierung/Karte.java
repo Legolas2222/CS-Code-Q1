@@ -1,5 +1,7 @@
 package com.dijkstraimplementierung;
 
+import java.net.http.WebSocket;
+
 public class Karte {
 
   private Graph karte;
@@ -173,6 +175,46 @@ public class Karte {
     karte.setAllEdgeMarks(false);
     boolean result =  tiefenSucheUnterricht(karte.getVertex(startId), nachId);
     System.out.println(result);
+  }
+
+  public boolean breitenSuche(String startId, String nachId) {
+    // Teste, dass der Startknoten existiert
+    if (karte.getVertex(startId) == null) {
+      System.out.println("Startknoten existiert nicht");
+      return false;
+    }
+    // Markiere alle Knoten als nicht besucht
+    karte.setAllVertexMarks(false);
+    // Markiere den Startknoten als besucht
+    karte.getVertex(startId).setMark(true);
+    // Initialisiere die leere Schlange
+    Queue<Vertex> queue = new Queue<Vertex>();
+    // Füge den Startknoten in die Schlange ein
+    queue.enqueue(karte.getVertex(startId));
+    // Solange die Schlange nicht leer ist
+    while (!queue.isEmpty()) {
+      // Entnehme den ersten Knoten aus der Schlange
+      Vertex k = queue.front();
+      queue.dequeue();
+      // Abbruchbedingung der Iteration
+      if (k.getID().equals(nachId)) {
+        System.out.println("Gefunden");
+        return true;
+      }
+      // Durchlaufe die Nachbarn des aktuellen Knotens
+      List<Vertex> nachbarn = karte.getNeighbours(k);
+      for (nachbarn.toFirst(); nachbarn.hasAccess(); nachbarn.next()) {
+        // Fall der aktuelle Nachbar noch nicht besucht wurde
+        if (!nachbarn.getContent().isMarked()) {
+          // Markiere den Nachbarn als besucht
+          nachbarn.getContent().setMark(true);
+          // Füge den Nachbarn in die Schlange ein
+          queue.enqueue(nachbarn.getContent());
+        }
+      }
+    }
+    System.out.println("Nicht gefunden");
+    return false;
   }
 
 }
