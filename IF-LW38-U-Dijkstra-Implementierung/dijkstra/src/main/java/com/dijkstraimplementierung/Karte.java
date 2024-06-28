@@ -188,7 +188,7 @@ public class Karte {
     // Markiere den Startknoten als besucht
     karte.getVertex(startId).setMark(true);
     // Initialisiere die leere Schlange
-    Queue<Vertex> queue = new Queue<Vertex>();
+    Queue<Vertex> queue = new Queue<>();
     // Füge den Startknoten in die Schlange ein
     queue.enqueue(karte.getVertex(startId));
     // Solange die Schlange nicht leer ist
